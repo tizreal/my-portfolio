@@ -3,17 +3,17 @@
 import { useState, useEffect, startTransition } from "react";
 
 const navLinks = [
-  { label: "About", href: "#about" },
-  { label: "Skills", href: "#skills" },
+  { label: "About",    href: "#about" },
+  { label: "Skills",   href: "#skills" },
   { label: "Projects", href: "#projects" },
-  { label: "Contact", href: "#resume" },
-  { label: "Resume", href: "#resume" },
+  { label: "Contact",  href: "#resume" },
+  { label: "Resume",   href: "#resume" },
 ];
 
 export default function Navbar() {
-  const [scrolled, setScrolled] = useState(false);
-  const [menuOpen, setMenuOpen] = useState(false);
-  const [theme, setTheme] = useState("dark");
+  const [scrolled,  setScrolled]  = useState(false);
+  const [menuOpen,  setMenuOpen]  = useState(false);
+  const [theme,     setTheme]     = useState("dark");
 
   useEffect(() => {
     const handleScroll = () => setScrolled(window.scrollY > 50);
@@ -50,7 +50,8 @@ export default function Navbar() {
           : "bg-transparent"
       }`}
     >
-      <div className="px-6 py-4 flex items-center justify-between">
+      <div className="px-4 md:px-6 py-4 flex items-center justify-between">
+        {/* Logo */}
         <a
           href="#hero"
           onClick={(e) => handleNavClick(e, "#hero")}
@@ -82,8 +83,6 @@ export default function Navbar() {
               )}
             </li>
           ))}
-
-          {/* Theme toggle */}
           <li>
             <button
               onClick={toggleTheme}
@@ -99,34 +98,44 @@ export default function Navbar() {
         <div className="md:hidden flex items-center gap-3">
           <button
             onClick={toggleTheme}
-            className={`text-sm text-muted hover:text-accent transition-colors duration-200 rounded ${focusRing}`}
+            className={`text-lg min-h-11 min-w-11 flex items-center justify-center text-muted hover:text-accent transition-colors duration-200 rounded ${focusRing}`}
             aria-label="Toggle theme"
           >
             {theme === "dark" ? "☀️" : "🌙"}
           </button>
           <button
-            className={`text-muted hover:text-accent transition-colors duration-200 rounded ${focusRing}`}
             onClick={() => setMenuOpen(!menuOpen)}
+            className={`min-h-11 min-w-11 flex items-center justify-center text-muted hover:text-accent transition-colors duration-200 rounded ${focusRing}`}
             aria-label="Toggle menu"
+            aria-expanded={menuOpen}
           >
-            <span className="block w-6 h-0.5 bg-current mb-1.5 transition-all" />
-            <span className="block w-6 h-0.5 bg-current mb-1.5 transition-all" />
-            <span className="block w-6 h-0.5 bg-current transition-all" />
+            {menuOpen ? (
+              <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                <line x1="18" y1="6" x2="6" y2="18" />
+                <line x1="6" y1="6" x2="18" y2="18" />
+              </svg>
+            ) : (
+              <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                <line x1="3" y1="6" x2="21" y2="6" />
+                <line x1="3" y1="12" x2="21" y2="12" />
+                <line x1="3" y1="18" x2="21" y2="18" />
+              </svg>
+            )}
           </button>
         </div>
       </div>
 
       {/* Mobile dropdown */}
       {menuOpen && (
-        <div className="md:hidden bg-background/95 backdrop-blur-xl px-6 pb-4 border-t border-border/30">
-          <ul className="flex flex-col gap-4 pt-4">
+        <div className="md:hidden bg-surface border-b border-border">
+          <ul className="flex flex-col px-4 py-2">
             {navLinks.map(({ label, href }, index) => (
               <li key={label}>
                 {index === navLinks.length - 1 ? (
                   <a
                     href={href}
                     onClick={(e) => handleNavClick(e, href)}
-                    className={`inline-block bg-accent text-white text-xs font-semibold px-5 py-2 rounded-full hover:bg-accent-hover transition-colors duration-200 ${focusRing}`}
+                    className={`inline-flex items-center min-h-11 bg-accent text-white text-xs font-semibold px-5 py-2 rounded-full hover:bg-accent-hover transition-colors duration-200 ${focusRing}`}
                   >
                     {label}
                   </a>
@@ -134,7 +143,7 @@ export default function Navbar() {
                   <a
                     href={href}
                     onClick={(e) => handleNavClick(e, href)}
-                    className={`text-muted hover:text-accent text-sm font-medium transition-colors duration-200 rounded ${focusRing}`}
+                    className={`flex items-center min-h-11 py-2 text-muted hover:text-accent text-sm font-medium transition-colors duration-200 rounded ${focusRing}`}
                   >
                     {label}
                   </a>

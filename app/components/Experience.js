@@ -66,12 +66,12 @@ export default function Experience() {
   const [gridRef, gridRevealed] = useReveal();
 
   return (
-    <section id="projects" className="py-20 px-6">
+    <section id="projects" className="py-20 px-4 md:px-6">
       <div className="max-w-5xl mx-auto">
         <h2 className="font-display text-[2rem] md:text-5xl font-bold text-foreground mb-4 text-center">Projects</h2>
         <p className="text-muted text-base leading-relaxed mb-16 max-w-xl text-center mx-auto">Things I&apos;ve designed, built, and shipped.</p>
 
-        <div ref={gridRef} className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+        <div ref={gridRef} className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
           {projects.map((project, index) => (
             <div
               key={project.title}

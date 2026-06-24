@@ -17,6 +17,7 @@ export default function RootLayout({ children }) {
       className="h-full antialiased scroll-smooth"
     >
       <head>
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
         <link rel="preconnect" href="https://fonts.googleapis.com" />
         <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
         <link
@@ -25,7 +26,7 @@ export default function RootLayout({ children }) {
         />
         <Script id="theme-init" strategy="beforeInteractive" dangerouslySetInnerHTML={{ __html: themeScript }} />
       </head>
-      <body className="min-h-full flex flex-col bg-background text-foreground font-sans">
+      <body className="min-h-full flex flex-col bg-background text-foreground font-sans overflow-x-hidden">
         {/* Primary blob — top-left */}
         <div className="fixed -top-45 -left-45 w-162.5 h-162.5 rounded-full bg-accent/5 blur-[140px] pointer-events-none -z-10" />
         {/* Secondary blob — bottom-right (emerald) */}

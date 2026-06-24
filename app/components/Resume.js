@@ -35,7 +35,7 @@ function DownloadIcon() {
 
 export default function Resume() {
   return (
-    <section id="resume" className="py-20 px-6 bg-background">
+    <section id="resume" className="py-20 px-4 md:px-6 bg-background">
       <div className="max-w-6xl mx-auto">
         <p className="text-accent font-mono text-sm tracking-widest uppercase mb-2 text-center">
           Let&apos;s connect
@@ -49,7 +49,7 @@ export default function Resume() {
           open.
         </p>
 
-        <div className="grid grid-cols-2 gap-6 mb-8 items-stretch">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8 items-stretch">
 
           {/* Resume card */}
           <div className="bg-surface border border-border rounded-2xl p-10 shadow-sm hover:shadow-md hover:border-accent/40 transition-all duration-300 h-full flex flex-col">
@@ -115,13 +115,13 @@ export default function Resume() {
         </div>
 
         {/* Footer bar */}
-        <div className="bg-surface border border-border rounded-2xl px-8 py-5 flex items-center justify-between shadow-sm">
-          <div className="flex items-center">
+        <div className="bg-surface border border-border rounded-2xl px-6 md:px-8 py-5 flex flex-col md:flex-row md:items-center md:justify-between gap-4 shadow-sm">
+          <div className="flex flex-col md:flex-row md:items-center">
             <div>
               <span className="text-muted text-xs uppercase tracking-widest block mb-1">Location</span>
               <span className="text-foreground text-sm font-medium">Toronto, Canada</span>
             </div>
-            <div className="w-px h-8 bg-border mx-6" />
+            <div className="hidden md:block w-px h-8 bg-border mx-6" />
             <div>
               <span className="text-muted text-xs uppercase tracking-widest block mb-1">Availability</span>
               <span className="text-secondary text-sm font-medium flex items-center">
@@ -130,7 +130,7 @@ export default function Resume() {
               </span>
             </div>
           </div>
-          <p className="text-muted text-xs">
+          <p className="text-muted text-xs md:text-right">
             Designed &amp; built by Temiloluwa Odunfa &middot; {new Date().getFullYear()}
           </p>
         </div>

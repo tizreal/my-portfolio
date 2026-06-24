@@ -29,7 +29,7 @@ export default function About() {
   const [gridRef, gridRevealed] = useReveal();
 
   return (
-    <section id="about" className="py-20 px-6">
+    <section id="about" className="py-20 px-4 md:px-6">
       <div className="max-w-5xl mx-auto">
         {/* Heading */}
         <h2 className="font-display text-[2rem] md:text-5xl font-bold text-foreground mb-4 text-center">
