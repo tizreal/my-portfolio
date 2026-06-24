@@ -1,26 +1,82 @@
 @import "tailwindcss";
 
+/* ── Font family values (Inter-only system) ── */
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  --font-inter:   'Inter', ui-sans-serif, system-ui, sans-serif;
+  --font-poppins: 'Inter', ui-sans-serif, system-ui, sans-serif;
+}
+
+/* ── Fixed accent colors — no light/dark variation ── */
+:root {
+  --primary:         #3B82F6;
+  --primary-hover:   #2563EB;
+  --secondary:       #10B981;
+  --secondary-hover: #059669;
+}
+
+/* ── Theme tokens ── */
+:root[data-theme="dark"] {
+  --bg:      #0F172A;
+  --surface: #1E293B;
+  --text:    #F8FAFC;
+  --muted:   #94A3B8;
+  --border:  #334155;
+  --elev-sm: 0 1px 3px rgba(0,0,0,0.30);
+  --elev-md: 0 8px 20px rgba(0,0,0,0.40);
+  --elev-lg: 0 24px 60px rgba(0,0,0,0.35);
+}
+
+:root[data-theme="light"] {
+  --bg:      #FFFFFF;
+  --surface: #F8FAFC;
+  --text:    #111827;
+  --muted:   #6B7280;
+  --border:  #D1D5DB;
+  --elev-sm: 0 1px 2px rgba(0,0,0,0.05);
+  --elev-md: 0 8px 20px rgba(0,0,0,0.08);
+  --elev-lg: 0 20px 40px rgba(0,0,0,0.12);
 }
 
 @theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+  --color-background:      var(--bg);
+  --color-foreground:      var(--text);
+  --color-surface:         var(--surface);
+  --color-accent:          var(--primary);
+  --color-accent-hover:    var(--primary-hover);
+  --color-secondary:       var(--secondary);
+  --color-secondary-hover: var(--secondary-hover);
+  --color-muted:           var(--muted);
+  --color-border:          var(--border);
+  --color-border-accent:   #3B82F6;
+  --font-sans:             var(--font-inter);
+  --font-display:          var(--font-poppins);
+  --shadow-sm:             var(--elev-sm);
+  --shadow-md:             var(--elev-md);
+  --shadow-lg:             var(--elev-lg);
+  --text-hero:             clamp(3rem, 6vw, 4rem);
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+/* ── Blue → Emerald gradient — Hero name only ── */
+.gradient-text {
+  background: linear-gradient(to right, #3B82F6, #10B981);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
 }
 
-body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+.hero-glow {
+  background: radial-gradient(ellipse 70% 50% at 30% 80%, color-mix(in srgb, var(--primary) 10%, transparent) 0%, transparent 100%);
+}
+
+.card-hover-glow {
+  background: radial-gradient(ellipse at top left, color-mix(in srgb, var(--primary) 10%, transparent), transparent 60%);
+}
+
+.hero-light-grid { display: none; }
+:root[data-theme="light"] .hero-light-grid {
+  display: block;
+  background-image:
+    linear-gradient(to right, rgba(59, 130, 246, 0.05) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(59, 130, 246, 0.05) 1px, transparent 1px);
+  background-size: 48px 48px;
 }
