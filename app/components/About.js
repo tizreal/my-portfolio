@@ -36,16 +36,15 @@ export default function About() {
           About Me
         </h2>
         <p className="text-muted text-base leading-relaxed mb-16 max-w-xl text-center mx-auto">
-          A quick look at my journey — where I came from, what I do today, and
-          where I&apos;m going.
+          I got into software because problems that seem impossibly complex usually have elegant solutions hiding underneath them. These days that means building systems that hold up under real load, writing APIs other developers enjoy using, and shipping products that actually do what they promise.
         </p>
 
         {/* Past / Present / Future cards */}
-        <div ref={gridRef} className="grid md:grid-cols-3 gap-6 mb-6">
+        <div ref={gridRef} className="grid md:grid-cols-3 gap-6">
           {timeline.map(({ label, num, heading, body }, index) => (
             <div
               key={label}
-              className={`bg-surface border border-border rounded-2xl p-8 relative overflow-hidden shadow-sm hover:shadow-md hover:-translate-y-1 hover:border-accent/40 transition-all duration-300 ease-out ${STAGGER[index]} ${gridRevealed ? "opacity-100 translate-y-0" : "opacity-0 translate-y-6"}`}
+              className={`border border-border rounded-2xl p-8 relative overflow-hidden shadow-sm hover:shadow-md hover:-translate-y-1 transition-all duration-300 ease-out ${index === 1 ? "bg-accent/5 border-t-2 border-t-accent hover:border-accent/60" : "bg-surface hover:border-accent/40"} ${STAGGER[index]} ${gridRevealed ? "opacity-100 translate-y-0" : "opacity-0 translate-y-6"}`}
             >
               {/* Decorative number */}
               <span className="absolute top-4 right-5 text-5xl font-black text-foreground/5 leading-none select-none">

@@ -86,10 +86,21 @@ export default function Navbar() {
           <li>
             <button
               onClick={toggleTheme}
-              className={`text-sm text-muted hover:text-accent transition-colors duration-200 rounded ${focusRing}`}
-              aria-label="Toggle theme"
+              aria-label={theme === "dark" ? "Switch to light mode" : "Switch to dark mode"}
+              className={`flex items-center gap-2 text-xs font-medium transition-colors duration-200 rounded-full ${focusRing} ${
+                theme === "dark" ? "text-muted hover:text-foreground" : "text-foreground"
+              }`}
             >
-              {theme === "dark" ? "☀️ Light Mode" : "🌙 Dark Mode"}
+              <span className="text-sm" aria-hidden="true">☀️</span>
+              {/* Track */}
+              <span className={`relative inline-flex h-5 w-9 shrink-0 rounded-full border transition-colors duration-300 ${
+                theme === "dark" ? "bg-muted/10 border-border" : "bg-accent border-transparent"
+              }`}>
+                <span className={`absolute top-0.5 left-0.5 h-3.5 w-3.5 rounded-full shadow-sm transition-transform duration-300 ${
+                  theme === "light" ? "translate-x-4 bg-white" : "translate-x-0 bg-foreground/60"
+                }`} />
+              </span>
+              <span className="text-sm" aria-hidden="true">🌙</span>
             </button>
           </li>
         </ul>
@@ -98,10 +109,14 @@ export default function Navbar() {
         <div className="md:hidden flex items-center gap-3">
           <button
             onClick={toggleTheme}
-            className={`text-lg min-h-11 min-w-11 flex items-center justify-center text-muted hover:text-accent transition-colors duration-200 rounded ${focusRing}`}
-            aria-label="Toggle theme"
+            aria-label={theme === "dark" ? "Switch to light mode" : "Switch to dark mode"}
+            className={`min-h-10 min-w-10 flex items-center justify-center rounded-full border transition-all duration-200 ${focusRing} ${
+              theme === "dark"
+                ? "border-border text-muted hover:border-accent/60 hover:text-accent"
+                : "border-accent/40 bg-accent/10 text-accent"
+            }`}
           >
-            {theme === "dark" ? "☀️" : "🌙"}
+            <span className="text-base">{theme === "dark" ? "🌙" : "☀️"}</span>
           </button>
           <button
             onClick={() => setMenuOpen(!menuOpen)}
