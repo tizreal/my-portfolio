@@ -9,25 +9,27 @@ const projects = [
     image: "/usermanager.png",
     imagePosition: "object-center",
     description:
-      "A full-stack user management system with secure authentication. Features JWT-based login, email verification, password reset via email link, and protected profile endpoints. Includes admin endpoints for listing and deleting users.",
+      "Most apps need authentication, this one does it properly. Users can sign up, verify their email, log in securely, and reset their password if they forget it. Admins can oversee and manage the full user base. Features JWT authentication, email verification, and role-protected endpoints — built end to end.",
     tags: ["Spring Boot", "React", "PostgreSQL", "JWT"],
     links: {
       github: "https://github.com/tizreal/usermanager-frontend",
       live: "https://usermanager-frontend.vercel.app/",
     },
-    notice: "⚠️ Backend hosted on Render free tier — may take 30–50s to wake up on first request.",
+    notice:
+      "⚠️ Backend hosted on Render free tier — may take 30–50s to wake up on first request.",
   },
   {
     title: "Library Management System",
     image: "/libraryapp.png",
     description:
-      "A full-stack CRUD application for managing books and library members. Built a REST API with Spring Boot and PostgreSQL, then connected it to a React + Vite frontend. Also rebuilt the backend in Express.js separately to practice Node.js — two backends, one project, twice the learning.",
+      "Managing a library means keeping track of books and the people borrowing them, this app handles both. Full CRUD operations for books and members, with a clean interface that makes the data easy to work with. The interesting part: the backend was built twice, once in Spring Boot, once in Express.js — same functionality, different stacks. Two backends, one project, twice the learning.",
     tags: ["Spring Boot", "React", "Vite", "PostgreSQL"],
     links: {
       github: "https://github.com/tizreal/LibraryApp",
       live: "https://library-app-hazel-psi.vercel.app/",
     },
-    notice: "⚠️ Backend hosted on Render free tier — may take 30–50s to wake up on first request.",
+    notice:
+      "⚠️ Backend hosted on Render free tier — may take 30–50s to wake up on first request.",
   },
   {
     title: "TODO App",
@@ -46,7 +48,14 @@ const STAGGER = ["", "delay-100", "delay-200", "delay-300"];
 
 function ExternalIcon() {
   return (
-    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+    <svg
+      width="14"
+      height="14"
+      viewBox="0 0 24 24"
+      fill="none"
+      stroke="currentColor"
+      strokeWidth="2"
+    >
       <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6" />
       <polyline points="15,3 21,3 21,9" />
       <line x1="10" y1="14" x2="21" y2="3" />
@@ -68,8 +77,12 @@ export default function Experience() {
   return (
     <section id="projects" className="py-20 px-4 md:px-6">
       <div className="max-w-5xl mx-auto">
-        <h2 className="font-display text-[2rem] md:text-5xl font-bold text-foreground mb-4 text-center">Projects</h2>
-        <p className="text-muted text-base leading-relaxed mb-16 max-w-xl text-center mx-auto">Things I&apos;ve designed, built, and shipped.</p>
+        <h2 className="font-display text-[2rem] md:text-5xl font-bold text-foreground mb-4 text-center">
+          Projects
+        </h2>
+        <p className="text-muted text-base leading-relaxed mb-16 max-w-xl text-center mx-auto">
+          Things I&apos;ve designed, built, and shipped.
+        </p>
 
         <div ref={gridRef} className="grid gap-6">
           {/* Featured card — full width */}
@@ -103,7 +116,9 @@ export default function Experience() {
                     <span className="text-xs font-semibold px-2 py-0.5 rounded-full bg-accent/10 text-accent border border-accent/30 shrink-0">
                       Featured
                     </span>
-                    <h3 className="text-xl font-semibold tracking-tight text-accent">{project.title}</h3>
+                    <h3 className="text-xl font-semibold tracking-tight text-accent">
+                      {project.title}
+                    </h3>
                   </div>
 
                   <p className="text-muted text-sm leading-relaxed mb-4 flex-1">
@@ -143,7 +158,9 @@ export default function Experience() {
                       </a>
                     </div>
                     {project.notice && (
-                      <p className="text-xs text-muted italic">{project.notice}</p>
+                      <p className="text-xs text-muted italic">
+                        {project.notice}
+                      </p>
                     )}
                   </div>
                 </div>
@@ -180,7 +197,9 @@ export default function Experience() {
                           Coming Soon
                         </span>
                       ) : (
-                        <span className="text-muted text-sm">Screenshot coming soon</span>
+                        <span className="text-muted text-sm">
+                          Screenshot coming soon
+                        </span>
                       )}
                     </div>
                   )}
@@ -190,7 +209,9 @@ export default function Experience() {
                       {String(index + 1).padStart(2, "0")}
                     </p>
                     <div className="flex items-center gap-2 mb-3">
-                      <h3 className="text-xl font-semibold tracking-tight text-accent">{project.title}</h3>
+                      <h3 className="text-xl font-semibold tracking-tight text-accent">
+                        {project.title}
+                      </h3>
                       {project.comingSoon && (
                         <span className="text-xs font-semibold px-2 py-0.5 rounded-full bg-secondary/15 text-secondary border border-secondary/30 shrink-0">
                           Soon
@@ -217,7 +238,9 @@ export default function Experience() {
 
                     <div className="flex flex-col gap-2">
                       {project.comingSoon ? (
-                        <p className="text-xs text-muted italic">In progress — check back soon.</p>
+                        <p className="text-xs text-muted italic">
+                          In progress — check back soon.
+                        </p>
                       ) : (
                         <div className="flex gap-3">
                           <a
@@ -239,7 +262,9 @@ export default function Experience() {
                         </div>
                       )}
                       {project.notice && (
-                        <p className="text-xs text-muted italic">{project.notice}</p>
+                        <p className="text-xs text-muted italic">
+                          {project.notice}
+                        </p>
                       )}
                     </div>
                   </div>
