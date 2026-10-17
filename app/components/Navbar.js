@@ -3,8 +3,9 @@
 import { useState, useEffect, startTransition } from "react";
 
 const navLinks = [
-  { label: "About",    href: "#about" },
-  { label: "Skills",   href: "#skills" },
+  { label: "About",      href: "#about" },
+  { label: "Experience", href: "#experience" },
+  { label: "Skills",     href: "#skills" },
   { label: "Projects", href: "#projects" },
   { label: "Contact",  href: "#resume" },
   { label: "Resume",   href: "#resume" },
@@ -66,7 +67,7 @@ export default function Navbar() {
         </a>
 
         {/* Desktop links */}
-        <ul className="hidden md:flex gap-8 items-center">
+        <ul className="hidden md:flex gap-5 lg:gap-8 items-center">
           {navLinks.map(({ label, href }, index) => (
             <li key={label}>
               {index === navLinks.length - 1 ? (
