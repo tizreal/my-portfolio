@@ -24,7 +24,12 @@ export default function Navbar() {
 
   useEffect(() => {
     document.body.style.overflow = menuOpen ? "hidden" : "";
-    return () => { document.body.style.overflow = ""; };
+    const onKeyDown = (e) => { if (e.key === "Escape") setMenuOpen(false); };
+    if (menuOpen) window.addEventListener("keydown", onKeyDown);
+    return () => {
+      document.body.style.overflow = "";
+      window.removeEventListener("keydown", onKeyDown);
+    };
   }, [menuOpen]);
 
   useEffect(() => {
@@ -61,6 +66,7 @@ export default function Navbar() {
         <a
           href="#hero"
           onClick={(e) => handleNavClick(e, "#hero")}
+          aria-label="Back to top"
           className={`font-black text-accent tracking-tight text-xl font-display rounded ${focusRing}`}
         >
           T
@@ -143,8 +149,9 @@ export default function Navbar() {
         }`}
       />
 
-      {/* Side drawer */}
+      {/* Side drawer — inert while closed so its links are not tab-focusable off-screen */}
       <div
+        inert={!menuOpen}
         className={`fixed top-0 right-0 h-full w-72 bg-surface border-l border-border z-50 md:hidden flex flex-col transition-transform duration-300 ease-in-out ${
           menuOpen ? "translate-x-0" : "translate-x-full"
         }`}

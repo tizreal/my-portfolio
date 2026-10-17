@@ -1,9 +1,36 @@
 import Script from "next/script";
 import "./globals.css";
+import { site } from "./data/site";
+
+const title = "Temiloluwa Odunfa | Software Developer";
+const description =
+  "Software developer in Mississauga, Ontario, working in Java, Spring Boot, PostgreSQL, REST APIs, and React.";
+const image = {
+  url: "/profile.png",
+  width: 1254,
+  height: 1254,
+  alt: "Temiloluwa Odunfa",
+};
 
 export const metadata = {
-  title: "Temiloluwa Odunfa | Portfolio",
-  description: "Software developer portfolio — Temiloluwa Odunfa",
+  metadataBase: new URL(site.url),
+  title,
+  description,
+  openGraph: {
+    type: "website",
+    url: "/",
+    siteName: site.name,
+    title,
+    description,
+    locale: "en_CA",
+    images: [image],
+  },
+  twitter: {
+    card: "summary",
+    title,
+    description,
+    images: [image.url],
+  },
 };
 
 const themeScript = `(function(){try{var saved=localStorage.getItem('theme');var preferred=window.matchMedia('(prefers-color-scheme: dark)').matches?'dark':'light';document.documentElement.setAttribute('data-theme',saved||preferred);}catch(e){}})();`;

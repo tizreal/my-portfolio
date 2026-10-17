@@ -61,7 +61,7 @@ export default function Hero() {
                 <span className="gradient-text">Temiloluwa Odunfa</span>
               </h1>
 
-              <p className="text-muted/80 text-sm md:text-base font-medium mb-4">
+              <p className="text-muted text-sm md:text-base font-medium mb-4">
                 Software Developer — Java, Spring Boot, PostgreSQL &amp; React.
               </p>
 
@@ -70,9 +70,9 @@ export default function Hero() {
                 <span className="animate-pulse text-accent">|</span>
               </h2>
 
-              <p className="text-muted/60 text-sm max-w-xl mb-10 leading-relaxed italic">
+              <p className="text-muted text-sm max-w-xl mb-10 leading-relaxed italic">
                 &ldquo;First, solve the problem. Then, write the code.&rdquo;{" "}
-                <span className="not-italic text-muted/40">— John Johnson</span>
+                <span className="not-italic text-muted">— John Johnson</span>
               </p>
 
               <div className="flex flex-col sm:flex-row gap-4">
@@ -137,7 +137,7 @@ export default function Hero() {
                     <p className="text-2xl font-bold text-accent">
                       {value}
                     </p>
-                    <p className="text-[10px] uppercase tracking-normal text-muted/60 mt-1">
+                    <p className="text-[10px] uppercase tracking-normal text-muted mt-1">
                       {label}
                     </p>
                   </div>

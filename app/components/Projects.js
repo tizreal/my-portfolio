@@ -89,11 +89,11 @@ function ProjectCard({ project, index, featured, revealed }) {
         <div
           role="img"
           aria-label={`${project.title} workflow stages: ${project.stages.join(", ")}`}
-          className={`w-full ${featured ? "aspect-16/7" : "aspect-video"} rounded-t-2xl bg-surface border-b border-border hero-light-grid flex flex-wrap items-center justify-center content-center gap-2 px-6`}
+          className="w-full rounded-t-2xl bg-accent/5 border-b border-border flex flex-wrap items-center justify-center content-center gap-2 px-6 py-10 md:py-16"
         >
           {project.stages.map((stage, i) => (
             <span key={stage} className="flex items-center gap-2">
-              <span className="text-xs md:text-sm font-semibold px-3 py-1.5 rounded-full bg-accent/10 text-accent border border-accent/30">
+              <span className="text-xs md:text-base font-semibold px-3 md:px-5 py-1.5 md:py-2 rounded-full bg-accent/10 text-accent border border-accent/30">
                 {stage}
               </span>
               {i < project.stages.length - 1 && (
