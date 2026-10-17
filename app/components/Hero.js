@@ -1,12 +1,13 @@
 "use client";
 
 import { useEffect, useState } from "react";
+import ContactLinks from "./ContactLinks";
 
-const roles = ["Full-Stack Developer", "Backend Engineer", "API Designer"];
+const roles = ["Backend-focused", "Full-stack", "REST APIs & PostgreSQL"];
 
 const stats = [
-  { value: "3+", label: "Years Exp" },
-  { value: "8+", label: "Projects" },
+  { value: "BSc", label: "CS, York University" },
+  { value: "3", label: "Projects shown below" },
 ];
 
 export default function Hero() {
@@ -61,8 +62,7 @@ export default function Hero() {
               </h1>
 
               <p className="text-muted/80 text-sm md:text-base font-medium mb-4">
-                Full-Stack Engineer building scalable backend systems and modern
-                web applications.
+                Software Developer — Java, Spring Boot, PostgreSQL &amp; React.
               </p>
 
               <h2 className="font-display text-xl md:text-[2rem] text-muted font-semibold mb-8 h-9 md:h-10">
@@ -96,6 +96,8 @@ export default function Hero() {
                   Get In Touch
                 </button>
               </div>
+
+              <ContactLinks className="mt-6" />
             </div>
 
             {/* Right column: terminal (desktop only) + stat cards */}
@@ -109,12 +111,15 @@ export default function Hero() {
                   <span className="ml-3 text-xs text-muted/50 font-mono">terminal</span>
                 </div>
                 <div className="p-4 font-mono text-xs leading-snug space-y-1">
-                  <p><span className="text-accent">$</span> <span className="text-muted">curl /api/users/me</span></p>
-                  <p className="text-muted/60">→ 200 OK</p>
+                  <p><span className="text-accent">$</span> <span className="text-muted">cat profile.json</span></p>
                   <p className="text-foreground/80">{"{"}</p>
                   <p className="pl-4"><span className="text-secondary">&quot;name&quot;</span><span className="text-muted">: </span><span className="text-accent/80">&quot;Temi&quot;</span><span className="text-muted">,</span></p>
-                  <p className="pl-4"><span className="text-secondary">&quot;role&quot;</span><span className="text-muted">: </span><span className="text-accent/80">&quot;Full-Stack Engineer&quot;</span><span className="text-muted">,</span></p>
-                  <p className="pl-4"><span className="text-secondary">&quot;stack&quot;</span><span className="text-muted">: </span><span className="text-accent/80">&quot;Spring Boot + React&quot;</span><span className="text-muted">,</span></p>
+                  <p className="pl-4"><span className="text-secondary">&quot;role&quot;</span><span className="text-muted">: </span><span className="text-accent/80">&quot;Software Developer&quot;</span><span className="text-muted">,</span></p>
+                  <p className="pl-4"><span className="text-secondary">&quot;stack&quot;</span><span className="text-muted">: [</span></p>
+                  <p className="pl-8"><span className="text-accent/80">&quot;Java&quot;</span><span className="text-muted">, </span><span className="text-accent/80">&quot;Spring Boot&quot;</span><span className="text-muted">,</span></p>
+                  <p className="pl-8"><span className="text-accent/80">&quot;PostgreSQL&quot;</span><span className="text-muted">, </span><span className="text-accent/80">&quot;React&quot;</span></p>
+                  <p className="pl-4"><span className="text-muted">],</span></p>
+                  <p className="pl-4"><span className="text-secondary">&quot;location&quot;</span><span className="text-muted">: </span><span className="text-accent/80">&quot;Mississauga, ON&quot;</span><span className="text-muted">,</span></p>
                   <p className="pl-4"><span className="text-secondary">&quot;status&quot;</span><span className="text-muted">: </span><span className="text-secondary">&quot;open to opportunities&quot;</span></p>
                   <p className="text-foreground/80">{"}"}</p>
                   <p className="pt-1"><span className="text-accent">$</span> <span className="animate-pulse text-muted">▋</span></p>
