@@ -62,7 +62,7 @@ export default function Hero() {
               </h1>
 
               <p className="text-muted text-sm md:text-base font-medium mb-4">
-                Software Developer — Java, Spring Boot, PostgreSQL &amp; React.
+                Software Engineer — Java, Spring Boot, PostgreSQL &amp; React.
               </p>
 
               <h2 className="font-display text-xl md:text-[2rem] text-muted font-semibold mb-8 h-9 md:h-10">
@@ -114,7 +114,7 @@ export default function Hero() {
                   <p><span className="text-accent">$</span> <span className="text-muted">cat profile.json</span></p>
                   <p className="text-foreground/80">{"{"}</p>
                   <p className="pl-4"><span className="text-secondary">&quot;name&quot;</span><span className="text-muted">: </span><span className="text-accent/80">&quot;Temi&quot;</span><span className="text-muted">,</span></p>
-                  <p className="pl-4"><span className="text-secondary">&quot;role&quot;</span><span className="text-muted">: </span><span className="text-accent/80">&quot;Software Developer&quot;</span><span className="text-muted">,</span></p>
+                  <p className="pl-4"><span className="text-secondary">&quot;role&quot;</span><span className="text-muted">: </span><span className="text-accent/80">&quot;Software Engineer&quot;</span><span className="text-muted">,</span></p>
                   <p className="pl-4"><span className="text-secondary">&quot;stack&quot;</span><span className="text-muted">: [</span></p>
                   <p className="pl-8"><span className="text-accent/80">&quot;Java&quot;</span><span className="text-muted">, </span><span className="text-accent/80">&quot;Spring Boot&quot;</span><span className="text-muted">,</span></p>
                   <p className="pl-8"><span className="text-accent/80">&quot;PostgreSQL&quot;</span><span className="text-muted">, </span><span className="text-accent/80">&quot;React&quot;</span></p>

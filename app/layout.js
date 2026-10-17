@@ -2,9 +2,9 @@ import Script from "next/script";
 import "./globals.css";
 import { site } from "./data/site";
 
-const title = "Temiloluwa Odunfa | Software Developer";
+const title = "Temiloluwa Odunfa | Software Engineer";
 const description =
-  "Software developer in Mississauga, Ontario, working in Java, Spring Boot, PostgreSQL, REST APIs, and React.";
+  "Software engineer in Mississauga, Ontario, working in Java, Spring Boot, PostgreSQL, REST APIs, and React.";
 const image = {
   url: "/profile.png",
   width: 1254,

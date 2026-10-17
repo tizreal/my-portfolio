@@ -12,7 +12,7 @@ const timeline = [
   {
     label: "Now",
     num: "02",
-    heading: "Contract developer",
+    heading: "Current role",
     body: "I'm currently a Full Stack Software Developer on contract, working across backend services, databases, and frontend features.",
   },
   {
@@ -36,7 +36,7 @@ export default function About() {
           About Me
         </h2>
         <p className="text-muted text-base leading-relaxed mb-16 max-w-xl text-center mx-auto">
-          I&apos;m a software developer focused on backend work in Java, Spring Boot, PostgreSQL, and REST APIs, and I also build frontends with React and TypeScript.
+          I&apos;m a software engineer focused on backend work in Java, Spring Boot, PostgreSQL, and REST APIs, and I also build frontends with React and TypeScript.
         </p>
 
         {/* Past / Present / Future cards */}
