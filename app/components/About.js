@@ -6,8 +6,18 @@ const timeline = [
   {
     label: "Education",
     num: "01",
-    heading: "York University",
+    heading: "Degree and credentials",
     body: "I graduated from York University in 2024 with a BSc in Computer Science.",
+    credentials: [
+      {
+        text: "Top Performer, Software Engineering cohort — Black Career Advancement Program, Black Founders Network, University of Toronto (2026)",
+        href: "https://www.linkedin.com/feed/update/urn:li:activity:7513041055089541120/",
+      },
+      {
+        // Add the Coursera credential URL as `href` to link this line.
+        text: "Meta Front-End Developer Professional Certificate (2025)",
+      },
+    ],
   },
   {
     label: "Now",
@@ -41,7 +51,7 @@ export default function About() {
 
         {/* Past / Present / Future cards */}
         <div ref={gridRef} className="grid md:grid-cols-3 gap-6">
-          {timeline.map(({ label, num, heading, body }, index) => (
+          {timeline.map(({ label, num, heading, body, credentials }, index) => (
             <div
               key={label}
               className={`border border-border rounded-2xl p-8 relative overflow-hidden shadow-sm hover:shadow-md hover:-translate-y-1 transition-all duration-300 ease-out ${index === 1 ? "bg-accent/5 border-t-2 border-t-accent hover:border-accent/60" : "bg-surface hover:border-accent/40"} ${STAGGER[index]} ${gridRevealed ? "opacity-100 translate-y-0" : "opacity-0 translate-y-6"}`}
@@ -65,6 +75,26 @@ export default function About() {
                   {para}
                 </p>
               ))}
+              {credentials && (
+                <ul className="mt-4 pt-4 border-t border-border space-y-2 list-disc pl-5 marker:text-accent">
+                  {credentials.map(({ text, href }) => (
+                    <li key={text} className="text-muted text-sm leading-relaxed">
+                      {href ? (
+                        <a
+                          href={href}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="underline decoration-accent/40 underline-offset-2 hover:text-accent hover:decoration-accent transition-colors duration-200 rounded focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent/50"
+                        >
+                          {text}
+                        </a>
+                      ) : (
+                        text
+                      )}
+                    </li>
+                  ))}
+                </ul>
+              )}
             </div>
           ))}
         </div>
