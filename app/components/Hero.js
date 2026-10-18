@@ -1,43 +1,12 @@
-"use client";
-
-import { useEffect, useState } from "react";
 import ContactLinks from "./ContactLinks";
-
-const roles = ["Backend-focused", "Full-stack", "REST APIs & PostgreSQL"];
+import { resumeHref, site } from "../data/site";
 
 const stats = [
-  { value: "BSc", label: "CS, York University" },
-  { value: "3", label: "Projects shown below" },
+  { value: "2024", label: "BSc CS, York University" },
+  { value: "2026", label: "BFN Top Performer, SWE cohort" },
 ];
 
 export default function Hero() {
-  const [roleIndex, setRoleIndex] = useState(0);
-  const [displayed, setDisplayed] = useState("");
-  const [deleting, setDeleting] = useState(false);
-
-  useEffect(() => {
-    const current = roles[roleIndex];
-    let timeout;
-
-    if (!deleting && displayed.length < current.length) {
-      timeout = setTimeout(
-        () => setDisplayed(current.slice(0, displayed.length + 1)),
-        80,
-      );
-    } else if (!deleting && displayed.length === current.length) {
-      timeout = setTimeout(() => setDeleting(true), 2000);
-    } else if (deleting && displayed.length > 0) {
-      timeout = setTimeout(() => setDisplayed(displayed.slice(0, -1)), 40);
-    } else if (deleting && displayed.length === 0) {
-      timeout = setTimeout(() => {
-        setDeleting(false);
-        setRoleIndex((prev) => (prev + 1) % roles.length);
-      }, 300);
-    }
-
-    return () => clearTimeout(timeout);
-  }, [displayed, deleting, roleIndex]);
-
   return (
     <section
       id="hero"
@@ -61,43 +30,32 @@ export default function Hero() {
                 <span className="gradient-text">Temiloluwa Odunfa</span>
               </h1>
 
-              <p className="text-muted text-sm md:text-base font-medium mb-4">
+              <p className="font-display text-lg md:text-2xl text-foreground/90 font-semibold mb-3">
                 Software Engineer — Java, Spring Boot, PostgreSQL &amp; React.
               </p>
 
-              <h2 className="font-display text-xl md:text-[2rem] text-muted font-semibold mb-8 h-9 md:h-10">
-                <span>{displayed}</span>
-                <span className="animate-pulse text-accent">|</span>
-              </h2>
-
-              <p className="text-muted text-sm max-w-xl mb-10 leading-relaxed italic">
-                &ldquo;First, solve the problem. Then, write the code.&rdquo;{" "}
-                <span className="not-italic text-muted">— John Johnson</span>
+              <p className="text-muted text-sm md:text-base max-w-xl mb-10 leading-relaxed">
+                I build backend services, REST APIs, and the React frontends
+                that use them.
               </p>
 
               <div className="flex flex-col sm:flex-row gap-4">
-                <button
-                  onClick={() => {
-                    const projects = document.querySelector("#projects");
-                    if (projects)
-                      projects.scrollIntoView({ behavior: "smooth" });
-                  }}
-                  className="w-full sm:w-auto px-8 py-3 bg-accent text-white font-semibold rounded-full hover:bg-accent-hover hover:-translate-y-1 transition-all duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent/50"
+                <a
+                  href="#projects"
+                  className="w-full sm:w-auto text-center px-8 py-3 bg-accent text-white font-semibold rounded-full hover:bg-accent-hover hover:-translate-y-1 transition-all duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent/50"
                 >
-                  View My Work
-                </button>
-                <button
-                  onClick={() => {
-                    const contact = document.querySelector("#resume");
-                    if (contact) contact.scrollIntoView({ behavior: "smooth" });
-                  }}
-                  className="w-full sm:w-auto px-8 py-3 border border-border text-foreground/80 font-semibold rounded-full hover:border-accent hover:text-accent hover:-translate-y-1 transition-all duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent/50"
+                  View Selected Work
+                </a>
+                <a
+                  href={resumeHref}
+                  {...(site.resume ? { target: "_blank", rel: "noopener noreferrer" } : {})}
+                  className="w-full sm:w-auto text-center px-8 py-3 border border-border text-foreground/80 font-semibold rounded-full hover:border-accent hover:text-accent hover:-translate-y-1 transition-all duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent/50"
                 >
-                  Get In Touch
-                </button>
+                  {site.resume ? "Resume" : "Request Resume"}
+                </a>
               </div>
 
-              <ContactLinks className="mt-6" />
+              <ContactLinks className="mt-6" omit={["Resume"]} />
             </div>
 
             {/* Right column: terminal (desktop only) + stat cards */}

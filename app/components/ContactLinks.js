@@ -9,10 +9,10 @@ const links = [
 ];
 
 // Compact one-click row of resume / profile / email links (hero and footer).
-export default function ContactLinks({ className = "" }) {
+export default function ContactLinks({ className = "", omit = [] }) {
   return (
     <ul className={`flex flex-wrap gap-2 ${className}`}>
-      {links.map(({ label, href, icon, external }) => (
+      {links.filter(({ label }) => !omit.includes(label)).map(({ label, href, icon, external }) => (
         <li key={label}>
           <a
             href={href}

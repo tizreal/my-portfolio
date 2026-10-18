@@ -12,10 +12,10 @@ export default function Home() {
       <Navbar />
       <main>
         <Hero />
-        <About />
         <Experience />
-        <Skills />
         <Projects />
+        <Skills />
+        <About />
         <Resume />
       </main>
     </>

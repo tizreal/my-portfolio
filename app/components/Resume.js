@@ -4,7 +4,7 @@ import { DownloadIcon, GithubIcon, LinkedInIcon, MailIcon } from "./icons";
 
 export default function Resume() {
   return (
-    <section id="resume" className="py-28 px-4 md:px-6 bg-background">
+    <section id="contact" className="py-28 px-4 md:px-6 bg-background">
       <div className="max-w-6xl mx-auto">
         <p className="text-accent font-mono text-sm tracking-widest uppercase mb-2 text-center">
           Let&apos;s connect

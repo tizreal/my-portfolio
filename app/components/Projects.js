@@ -183,10 +183,10 @@ export default function Projects() {
     <section id="projects" className="py-20 px-4 md:px-6">
       <div className="max-w-5xl mx-auto">
         <h2 className="font-display text-[2rem] md:text-5xl font-bold text-foreground mb-4 text-center">
-          Projects
+          Selected Work
         </h2>
         <p className="text-muted text-base leading-relaxed mb-16 max-w-xl text-center mx-auto">
-          Things I&apos;ve designed, built, and shipped.
+          Personal projects I designed and built end to end.
         </p>
 
         <div ref={gridRef} className="grid gap-6">

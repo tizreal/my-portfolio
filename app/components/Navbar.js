@@ -1,15 +1,21 @@
 "use client";
 
 import { useState, useEffect, startTransition } from "react";
+import { resumeHref, site } from "../data/site";
 
+// Order follows the page: experience → work → skills → about → contact.
 const navLinks = [
-  { label: "About",      href: "#about" },
   { label: "Experience", href: "#experience" },
+  { label: "Work",       href: "#projects" },
   { label: "Skills",     href: "#skills" },
-  { label: "Projects", href: "#projects" },
-  { label: "Contact",  href: "#resume" },
-  { label: "Resume",   href: "#resume" },
+  { label: "About",      href: "#about" },
+  { label: "Contact",    href: "#contact" },
 ];
+
+const resumeProps = {
+  href: resumeHref,
+  ...(site.resume ? { target: "_blank", rel: "noopener noreferrer" } : {}),
+};
 
 export default function Navbar() {
   const [scrolled,  setScrolled]  = useState(false);
@@ -74,27 +80,25 @@ export default function Navbar() {
 
         {/* Desktop links */}
         <ul className="hidden md:flex gap-5 lg:gap-8 items-center">
-          {navLinks.map(({ label, href }, index) => (
+          {navLinks.map(({ label, href }) => (
             <li key={label}>
-              {index === navLinks.length - 1 ? (
-                <a
-                  href={href}
-                  onClick={(e) => handleNavClick(e, href)}
-                  className={`bg-accent text-white text-xs font-semibold px-5 py-2 rounded-full hover:bg-accent-hover transition-colors duration-200 ${focusRing}`}
-                >
-                  {label}
-                </a>
-              ) : (
-                <a
-                  href={href}
-                  onClick={(e) => handleNavClick(e, href)}
-                  className={`text-muted hover:text-accent text-sm font-medium transition-colors duration-200 rounded ${focusRing}`}
-                >
-                  {label}
-                </a>
-              )}
+              <a
+                href={href}
+                onClick={(e) => handleNavClick(e, href)}
+                className={`text-muted hover:text-accent text-sm font-medium transition-colors duration-200 rounded ${focusRing}`}
+              >
+                {label}
+              </a>
             </li>
           ))}
+          <li>
+            <a
+              {...resumeProps}
+              className={`bg-accent text-white text-xs font-semibold px-5 py-2 rounded-full hover:bg-accent-hover transition-colors duration-200 ${focusRing}`}
+            >
+              Resume
+            </a>
+          </li>
           <li>
             <button
               onClick={toggleTheme}
@@ -173,27 +177,26 @@ export default function Navbar() {
 
         {/* Nav links */}
         <ul className="flex flex-col gap-1 px-4 py-6 flex-1">
-          {navLinks.map(({ label, href }, index) => (
+          {navLinks.map(({ label, href }) => (
             <li key={label}>
-              {index === navLinks.length - 1 ? (
-                <a
-                  href={href}
-                  onClick={(e) => handleNavClick(e, href)}
-                  className={`inline-flex items-center min-h-11 bg-accent text-white text-sm font-semibold px-5 py-2 rounded-full hover:bg-accent-hover transition-colors duration-200 ${focusRing}`}
-                >
-                  {label}
-                </a>
-              ) : (
-                <a
-                  href={href}
-                  onClick={(e) => handleNavClick(e, href)}
-                  className={`flex items-center min-h-11 px-2 text-foreground/80 hover:text-accent text-base font-medium transition-colors duration-200 rounded-lg hover:bg-accent/5 ${focusRing}`}
-                >
-                  {label}
-                </a>
-              )}
+              <a
+                href={href}
+                onClick={(e) => handleNavClick(e, href)}
+                className={`flex items-center min-h-11 px-2 text-foreground/80 hover:text-accent text-base font-medium transition-colors duration-200 rounded-lg hover:bg-accent/5 ${focusRing}`}
+              >
+                {label}
+              </a>
             </li>
           ))}
+          <li className="mt-2">
+            <a
+              {...resumeProps}
+              onClick={() => setMenuOpen(false)}
+              className={`inline-flex items-center min-h-11 bg-accent text-white text-sm font-semibold px-5 py-2 rounded-full hover:bg-accent-hover transition-colors duration-200 ${focusRing}`}
+            >
+              Resume
+            </a>
+          </li>
         </ul>
 
         {/* Theme toggle pinned to drawer bottom */}
