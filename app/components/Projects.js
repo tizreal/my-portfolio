@@ -7,6 +7,7 @@ import { site } from "../data/site";
 import { ExternalIcon, GithubIcon } from "./icons";
 
 // To re-enable a live demo, set `demoAvailable: true` on that project.
+// `freeTierBackend` shows a note that the first request may be slow.
 const projects = [
   {
     title: "TrackLo",
@@ -50,6 +51,8 @@ const projects = [
     source: [{ label: "GitHub Profile", href: site.github }],
     demoUrl: "https://tracklo-ui.vercel.app/",
     demoAvailable: true,
+    // Backend runs on Render's free tier, which sleeps when idle.
+    freeTierBackend: true,
   },
   {
     title: "UserManager",
@@ -70,6 +73,8 @@ const projects = [
     ],
     demoUrl: "https://usermanager-frontend.vercel.app/",
     demoAvailable: true,
+    // Backend runs on Render's free tier, which sleeps when idle.
+    freeTierBackend: true,
   },
   {
     title: "Library Management System",
@@ -89,6 +94,8 @@ const projects = [
     ],
     demoUrl: "https://library-app-hazel-psi.vercel.app/",
     demoAvailable: true,
+    // Backend runs on Render's free tier, which sleeps when idle.
+    freeTierBackend: true,
   },
 ];
 
@@ -130,7 +137,7 @@ function StageExplorer({ title, stages }) {
       <p
         id={panelId}
         aria-live="polite"
-        className="mt-5 max-w-xl mx-auto text-center text-sm text-foreground/80 leading-relaxed min-h-[5.5rem] sm:min-h-[4rem]"
+        className="mt-5 max-w-xl mx-auto text-center text-sm text-foreground/80 leading-relaxed min-h-22 sm:min-h-16"
       >
         <span className="font-semibold text-accent">{stages[selected].name}: </span>
         {stages[selected].detail}
@@ -239,6 +246,13 @@ function ProjectCard({ project, index, featured, revealed }) {
             </span>
           )}
         </div>
+        {project.demoAvailable && project.freeTierBackend && (
+          <p className="mt-3 text-xs text-muted leading-relaxed">
+            The demo&apos;s backend runs on a free hosting tier and sleeps when
+            idle, so the first load can take up to a minute. It isn&apos;t
+            broken; give it a moment to wake up.
+          </p>
+        )}
       </div>
     </div>
   );
