@@ -1,4 +1,5 @@
 import ContactLinks from "./ContactLinks";
+import RotatingRoles from "./RotatingRoles";
 import { resumeHref, site } from "../data/site";
 
 const stats = [
@@ -30,6 +31,11 @@ export default function Hero() {
                 <span className="gradient-text">Temiloluwa Odunfa</span>
               </h1>
 
+              <RotatingRoles
+                className="animate-fade-up font-display text-xl md:text-[1.75rem] text-muted font-semibold mb-4 h-8 md:h-10"
+                style={{ "--delay": "120ms" }}
+              />
+
               <p className="animate-fade-up font-display text-lg md:text-xl text-foreground/90 font-semibold mb-3" style={{ "--delay": "160ms" }}>
                 Software Engineer — Java, Spring Boot, PostgreSQL &amp; React.
               </p>
@@ -51,7 +57,7 @@ export default function Hero() {
                   {...(site.resume ? { target: "_blank", rel: "noopener noreferrer" } : {})}
                   className="w-full sm:w-auto text-center px-8 py-3 border border-border text-foreground/80 font-semibold rounded-full hover:border-accent hover:text-accent hover:-translate-y-1 transition-all duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent/50"
                 >
-                  {site.resume ? "Resume" : "Request Resume"}
+                  Download Resume
                 </a>
               </div>
 
