@@ -1,5 +1,6 @@
 "use client";
 
+import { useState } from "react";
 import Image from "next/image";
 import useReveal from "../hooks/useReveal";
 import { site } from "../data/site";
@@ -17,7 +18,34 @@ const projects = [
       "Safe concurrent claiming: claims use a conditional UPDATE (WHERE claimed_by IS NULL), so only one agent can claim a work pool. The second request gets a 409 Conflict.",
     ],
     tags: ["Java 21", "Spring Boot", "Spring Security", "PostgreSQL", "React", "TypeScript"],
-    stages: ["Submit", "Triage", "Scope", "Build", "Test", "Deploy"],
+    role: "Solo project. Designed and built the Spring Boot API and the React/TypeScript UI.",
+    // Each detail reflects a rule enforced in the tracklo-api service layer.
+    stages: [
+      {
+        name: "Submit",
+        detail: "A requester submits a request to their workspace. Requesters only see their own tickets; agents and admins see every ticket in the workspace.",
+      },
+      {
+        name: "Triage",
+        detail: "An agent or admin marks the request Valid, Needs info, or Decline. Valid moves it to Scope, and only the original requester can resubmit a Needs info ticket.",
+      },
+      {
+        name: "Scope",
+        detail: "Opens claimable BA and Designer pools. The API blocks the move to Build until the requester has signed off the scope.",
+      },
+      {
+        name: "Build",
+        detail: "Opens a Dev Team pool. Sending the ticket back to Scope requires a reason and clears the earlier scope sign-off.",
+      },
+      {
+        name: "Test",
+        detail: "Opens a QA pool. Deploy stays blocked until every item on the requester's UAT checklist is submitted as Pass; reopening to Build requires failing or blocked results.",
+      },
+      {
+        name: "Deploy",
+        detail: "The final stage, with no transitions out of it. Every stage change is recorded in the ticket's activity log.",
+      },
+    ],
     // Repositories are private, so link to the GitHub profile.
     source: [{ label: "GitHub Profile", href: site.github }],
     demoUrl: "https://tracklo-ui.vercel.app/",
@@ -27,6 +55,7 @@ const projects = [
     title: "UserManager",
     image: "/usermanager.png",
     imagePosition: "object-center",
+    role: "Solo project. Built the Spring Boot backend and the React frontend.",
     problem:
       "A complete account flow: sign up, verify email, log in, and recover a forgotten password.",
     highlights: [
@@ -45,6 +74,7 @@ const projects = [
   {
     title: "Library Management System",
     image: "/libraryapp.png",
+    role: "Solo project. Built the React frontend and both backends.",
     problem: "Keep track of a library's books and members from one interface.",
     highlights: [
       "The same REST API (CRUD for books and members) built twice: Spring Boot with Spring Data JPA, and Node.js/Express with parameterized SQL via node-postgres.",
@@ -66,6 +96,49 @@ const STAGGER = ["", "delay-100", "delay-200", "delay-300"];
 
 const linkFocus = "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent/50";
 
+function StageExplorer({ title, stages }) {
+  const [selected, setSelected] = useState(0);
+  const panelId = `${title.toLowerCase()}-stage-detail`;
+
+  return (
+    <div className="w-full rounded-t-2xl bg-accent/5 border-b border-border px-6 py-8 md:py-12">
+      <p className="text-xs text-muted text-center mb-4">
+        Select a stage to see what the API enforces
+      </p>
+      <ul className="flex flex-wrap items-center justify-center gap-2">
+        {stages.map(({ name }, i) => (
+          <li key={name} className="flex items-center gap-2">
+            <button
+              type="button"
+              onClick={() => setSelected(i)}
+              aria-pressed={selected === i}
+              aria-controls={panelId}
+              className={`relative z-20 text-xs md:text-base font-semibold px-3 md:px-5 py-1.5 md:py-2 rounded-full border transition-all duration-200 ${linkFocus} ${
+                selected === i
+                  ? "bg-accent text-white border-accent"
+                  : "bg-accent/10 text-accent border-accent/30 hover:bg-accent/20"
+              }`}
+            >
+              {name}
+            </button>
+            {i < stages.length - 1 && (
+              <span className="text-muted/60 text-xs" aria-hidden="true">→</span>
+            )}
+          </li>
+        ))}
+      </ul>
+      <p
+        id={panelId}
+        aria-live="polite"
+        className="mt-5 max-w-xl mx-auto text-center text-sm text-foreground/80 leading-relaxed min-h-[5.5rem] sm:min-h-[4rem]"
+      >
+        <span className="font-semibold text-accent">{stages[selected].name}: </span>
+        {stages[selected].detail}
+      </p>
+    </div>
+  );
+}
+
 function ProjectCard({ project, index, featured, revealed }) {
   return (
     <div
@@ -86,22 +159,7 @@ function ProjectCard({ project, index, featured, revealed }) {
           />
         </div>
       ) : (
-        <div
-          role="img"
-          aria-label={`${project.title} workflow stages: ${project.stages.join(", ")}`}
-          className="w-full rounded-t-2xl bg-accent/5 border-b border-border flex flex-wrap items-center justify-center content-center gap-2 px-6 py-10 md:py-16"
-        >
-          {project.stages.map((stage, i) => (
-            <span key={stage} className="flex items-center gap-2">
-              <span className="text-xs md:text-base font-semibold px-3 md:px-5 py-1.5 md:py-2 rounded-full bg-accent/10 text-accent border border-accent/30">
-                {stage}
-              </span>
-              {i < project.stages.length - 1 && (
-                <span className="text-muted/60 text-xs" aria-hidden="true">→</span>
-              )}
-            </span>
-          ))}
-        </div>
+        <StageExplorer title={project.title} stages={project.stages} />
       )}
 
       <div className="p-6 flex flex-col flex-1">
@@ -119,8 +177,12 @@ function ProjectCard({ project, index, featured, revealed }) {
           </h3>
         </div>
 
-        <p className="text-foreground/80 text-sm leading-relaxed mb-3">
+        <p className="text-foreground/80 text-sm leading-relaxed mb-2">
           {project.problem}
+        </p>
+        <p className="text-muted text-sm leading-relaxed mb-3">
+          <span className="text-foreground/80 font-medium">Role: </span>
+          {project.role}
         </p>
 
         <ul className="list-disc pl-5 marker:text-accent space-y-1.5 mb-4 flex-1">
