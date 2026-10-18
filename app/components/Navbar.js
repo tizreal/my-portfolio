@@ -21,6 +21,29 @@ export default function Navbar() {
   const [scrolled,  setScrolled]  = useState(false);
   const [menuOpen,  setMenuOpen]  = useState(false);
   const [theme,     setTheme]     = useState("dark");
+  const [active,    setActive]    = useState("");
+
+  // Highlight the section currently crossing the middle of the viewport.
+  useEffect(() => {
+    const sections = navLinks
+      .map(({ href }) => document.querySelector(href))
+      .filter(Boolean);
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) setActive(`#${entry.target.id}`);
+        });
+      },
+      { rootMargin: "-45% 0px -50% 0px" },
+    );
+    sections.forEach((section) => observer.observe(section));
+    const clearAtTop = () => { if (window.scrollY < 200) setActive(""); };
+    window.addEventListener("scroll", clearAtTop, { passive: true });
+    return () => {
+      observer.disconnect();
+      window.removeEventListener("scroll", clearAtTop);
+    };
+  }, []);
 
   useEffect(() => {
     const handleScroll = () => setScrolled(window.scrollY > 50);
@@ -46,7 +69,10 @@ export default function Navbar() {
   const toggleTheme = () => {
     const next = theme === "dark" ? "light" : "dark";
     setTheme(next);
-    document.documentElement.setAttribute("data-theme", next);
+    const root = document.documentElement;
+    root.classList.add("theme-transition");
+    root.setAttribute("data-theme", next);
+    window.setTimeout(() => root.classList.remove("theme-transition"), 350);
     localStorage.setItem("theme", next);
   };
 
@@ -54,7 +80,8 @@ export default function Navbar() {
     e.preventDefault();
     setMenuOpen(false);
     const target = document.querySelector(href);
-    if (target) target.scrollIntoView({ behavior: "smooth" });
+    const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    if (target) target.scrollIntoView({ behavior: reduceMotion ? "auto" : "smooth" });
   };
 
   const focusRing = "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent/50";
@@ -85,7 +112,12 @@ export default function Navbar() {
               <a
                 href={href}
                 onClick={(e) => handleNavClick(e, href)}
-                className={`text-muted hover:text-accent text-sm font-medium transition-colors duration-200 rounded ${focusRing}`}
+                aria-current={active === href ? "location" : undefined}
+                className={`relative text-sm font-medium transition-colors duration-200 rounded ${focusRing} after:absolute after:left-0 after:-bottom-1 after:h-0.5 after:w-full after:rounded-full after:bg-accent after:origin-left after:transition-transform after:duration-300 ${
+                  active === href
+                    ? "text-foreground after:scale-x-100"
+                    : "text-muted hover:text-accent after:scale-x-0 hover:after:scale-x-100"
+                }`}
               >
                 {label}
               </a>
@@ -182,7 +214,10 @@ export default function Navbar() {
               <a
                 href={href}
                 onClick={(e) => handleNavClick(e, href)}
-                className={`flex items-center min-h-11 px-2 text-foreground/80 hover:text-accent text-base font-medium transition-colors duration-200 rounded-lg hover:bg-accent/5 ${focusRing}`}
+                aria-current={active === href ? "location" : undefined}
+                className={`flex items-center min-h-11 px-2 text-base font-medium transition-colors duration-200 rounded-lg hover:bg-accent/5 ${focusRing} ${
+                  active === href ? "text-accent bg-accent/5" : "text-foreground/80 hover:text-accent"
+                }`}
               >
                 {label}
               </a>

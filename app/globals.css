@@ -80,3 +80,35 @@
     linear-gradient(to bottom, rgba(59, 130, 246, 0.05) 1px, transparent 1px);
   background-size: 48px 48px;
 }
+
+/* ── Motion system ── */
+@keyframes fade-up {
+  from { opacity: 0; transform: translateY(16px); }
+  to   { opacity: 1; transform: none; }
+}
+
+/* Hero entrance: CSS-only, so it runs before hydration. Stagger via --delay. */
+.animate-fade-up {
+  animation: fade-up 550ms cubic-bezier(0.2, 0.7, 0.2, 1) both;
+  animation-delay: var(--delay, 0ms);
+}
+
+/* Applied briefly while switching themes so colours cross-fade. */
+.theme-transition,
+.theme-transition *,
+.theme-transition *::before,
+.theme-transition *::after {
+  transition: background-color 300ms ease, border-color 300ms ease, color 300ms ease, fill 300ms ease !important;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto !important; }
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-delay: 0ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}

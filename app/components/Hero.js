@@ -20,26 +20,26 @@ export default function Hero() {
           <div className="flex flex-col lg:flex-row lg:items-start lg:justify-between gap-10 w-full">
             {/* Text content */}
             <div className="w-full max-w-2xl">
-              <div className="flex items-center gap-2 text-accent text-xs uppercase tracking-widest font-medium mb-6">
+              <div className="animate-fade-up flex items-center gap-2 text-accent text-xs uppercase tracking-widest font-medium mb-6" style={{ "--delay": "0ms" }}>
                 <span className="w-6 h-px bg-accent" />
                 Hello, World!
               </div>
 
-              <h1 className="font-display text-3xl md:text-5xl lg:text-6xl font-bold leading-[1.1] mb-4">
+              <h1 className="animate-fade-up font-display text-3xl md:text-5xl lg:text-6xl font-bold leading-[1.1] mb-4" style={{ "--delay": "80ms" }}>
                 <span className="text-foreground">I&apos;m </span>
                 <span className="gradient-text">Temiloluwa Odunfa</span>
               </h1>
 
-              <p className="font-display text-lg md:text-2xl text-foreground/90 font-semibold mb-3">
+              <p className="animate-fade-up font-display text-lg md:text-xl text-foreground/90 font-semibold mb-3" style={{ "--delay": "160ms" }}>
                 Software Engineer — Java, Spring Boot, PostgreSQL &amp; React.
               </p>
 
-              <p className="text-muted text-sm md:text-base max-w-xl mb-10 leading-relaxed">
+              <p className="animate-fade-up text-muted text-sm md:text-base max-w-xl mb-10 leading-relaxed" style={{ "--delay": "220ms" }}>
                 I build backend services, REST APIs, and the React frontends
                 that use them.
               </p>
 
-              <div className="flex flex-col sm:flex-row gap-4">
+              <div className="animate-fade-up flex flex-col sm:flex-row gap-4" style={{ "--delay": "300ms" }}>
                 <a
                   href="#projects"
                   className="w-full sm:w-auto text-center px-8 py-3 bg-accent text-white font-semibold rounded-full hover:bg-accent-hover hover:-translate-y-1 transition-all duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent/50"
@@ -55,11 +55,13 @@ export default function Hero() {
                 </a>
               </div>
 
-              <ContactLinks className="mt-6" omit={["Resume"]} />
+              <div className="animate-fade-up" style={{ "--delay": "360ms" }}>
+                <ContactLinks className="mt-6" omit={["Resume"]} />
+              </div>
             </div>
 
             {/* Right column: terminal (desktop only) + stat cards */}
-            <div className="lg:flex lg:flex-col lg:items-center lg:gap-3 lg:shrink-0 lg:w-72">
+            <div className="animate-fade-up lg:flex lg:flex-col lg:items-center lg:gap-3 lg:shrink-0 lg:w-72" style={{ "--delay": "420ms" }}>
               {/* Terminal — desktop only */}
               <div className="hidden lg:block bg-surface border border-border rounded-2xl overflow-hidden shadow-md w-72">
                 <div className="flex items-center gap-1.5 px-4 py-3 border-b border-border bg-surface">

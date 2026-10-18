@@ -142,7 +142,7 @@ function StageExplorer({ title, stages }) {
 function ProjectCard({ project, index, featured, revealed }) {
   return (
     <div
-      className={`bg-surface border border-border rounded-2xl overflow-hidden flex flex-col relative shadow-sm hover:shadow-lg hover:border-accent hover:-translate-y-1.5 transition-all duration-300 ease-out group ${STAGGER[index]} ${revealed ? "opacity-100 translate-y-0" : "opacity-0 translate-y-6"}`}
+      className={`bg-surface border border-border rounded-2xl overflow-hidden flex flex-col relative shadow-sm hover:shadow-lg hover:border-accent focus-within:border-accent hover:-translate-y-1 transition-all duration-300 ease-out group ${STAGGER[index]} ${revealed ? "opacity-100 translate-y-0" : "opacity-0 translate-y-6"}`}
     >
       <div className="absolute inset-0 card-hover-glow opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none z-10" />
 
@@ -155,7 +155,7 @@ function ProjectCard({ project, index, featured, revealed }) {
             sizes={featured ? "100vw" : "(min-width: 768px) 50vw, 100vw"}
             quality={100}
             priority={featured}
-            className={`object-cover ${project.imagePosition ?? "object-top"}`}
+            className={`object-cover ${project.imagePosition ?? "object-top"} transition-transform duration-500 ease-out group-hover:scale-[1.03]`}
           />
         </div>
       ) : (
@@ -212,9 +212,15 @@ function ProjectCard({ project, index, featured, revealed }) {
               target="_blank"
               rel="noopener noreferrer"
               aria-label={`${project.title}: ${label} (GitHub)`}
-              className={`inline-flex items-center gap-1.5 text-xs font-medium px-3 py-1.5 rounded-full border border-border text-muted hover:border-accent hover:text-accent hover:bg-accent/8 transition-all duration-200 ${linkFocus}`}
+              className={`group/link inline-flex items-center gap-1.5 text-xs font-medium px-3 py-1.5 rounded-full border border-border text-muted hover:border-accent hover:text-accent hover:bg-accent/8 transition-all duration-200 ${linkFocus}`}
             >
               <GithubIcon size={14} /> {label}
+              <span
+                aria-hidden="true"
+                className="transition-transform duration-200 group-hover/link:translate-x-0.5 group-hover/link:-translate-y-0.5 group-focus-visible/link:translate-x-0.5 group-focus-visible/link:-translate-y-0.5"
+              >
+                ↗
+              </span>
             </a>
           ))}
           {project.demoAvailable ? (
