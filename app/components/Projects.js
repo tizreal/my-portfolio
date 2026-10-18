@@ -4,7 +4,7 @@ import { useState } from "react";
 import Image from "next/image";
 import useReveal from "../hooks/useReveal";
 import { site } from "../data/site";
-import { ExternalIcon, GithubIcon } from "./icons";
+import { ExternalIcon, GithubIcon, WarningIcon } from "./icons";
 
 // To re-enable a live demo, set `demoAvailable: true` on that project.
 // `freeTierBackend` shows a note that the first request may be slow.
@@ -247,10 +247,15 @@ function ProjectCard({ project, index, featured, revealed }) {
           )}
         </div>
         {project.demoAvailable && project.freeTierBackend && (
-          <p className="mt-3 text-xs text-muted leading-relaxed">
+          <p className="mt-3 flex items-start gap-2 text-xs text-muted leading-relaxed">
+            <span className="text-amber-500 mt-0.5">
+              <WarningIcon />
+            </span>
+            <span>
             The demo&apos;s backend runs on a free hosting tier and sleeps when
             idle, so the first load can take up to a minute. It isn&apos;t
             broken; give it a moment to wake up.
+            </span>
           </p>
         )}
       </div>
