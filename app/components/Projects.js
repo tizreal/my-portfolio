@@ -49,7 +49,7 @@ const projects = [
     // Repositories are private, so link to the GitHub profile.
     source: [{ label: "GitHub Profile", href: site.github }],
     demoUrl: "https://tracklo-ui.vercel.app/",
-    demoAvailable: false,
+    demoAvailable: true,
   },
   {
     title: "UserManager",
@@ -69,7 +69,7 @@ const projects = [
       { label: "Backend", href: "https://github.com/tizreal/UserManager-Backend" },
     ],
     demoUrl: "https://usermanager-frontend.vercel.app/",
-    demoAvailable: false,
+    demoAvailable: true,
   },
   {
     title: "Library Management System",
@@ -88,7 +88,7 @@ const projects = [
       { label: "Express API", href: "https://github.com/tizreal/LibraryAppExpressBackend" },
     ],
     demoUrl: "https://library-app-hazel-psi.vercel.app/",
-    demoAvailable: false,
+    demoAvailable: true,
   },
 ];
 
@@ -228,6 +228,7 @@ function ProjectCard({ project, index, featured, revealed }) {
               href={project.demoUrl}
               target="_blank"
               rel="noopener noreferrer"
+              aria-label={`${project.title}: Live Demo`}
               className={`inline-flex items-center gap-1.5 text-xs font-medium px-3 py-1.5 rounded-full bg-accent text-white hover:bg-accent-hover transition-all duration-200 ${linkFocus}`}
             >
               <ExternalIcon /> Live Demo
