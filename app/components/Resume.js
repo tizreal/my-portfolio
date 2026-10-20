@@ -1,5 +1,4 @@
 import { site, resumeHref } from "../data/site";
-import ContactLinks from "./ContactLinks";
 import { DownloadIcon, GithubIcon, LinkedInIcon, MailIcon } from "./icons";
 
 export default function Resume() {
@@ -100,12 +99,9 @@ export default function Resume() {
               </span>
             </div>
           </div>
-          <div className="flex flex-col gap-3 md:items-end">
-            <ContactLinks className="md:justify-end" />
-            <p className="text-muted text-xs md:text-right">
-              Designed &amp; built by {site.name} &middot; {new Date().getFullYear()}
-            </p>
-          </div>
+          <p className="text-muted text-xs md:text-right">
+            Designed &amp; built by {site.name} &middot; {new Date().getFullYear()}
+          </p>
         </div>
 
       </div>

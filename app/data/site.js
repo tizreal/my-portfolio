@@ -6,9 +6,9 @@ export const site = {
   github: "https://github.com/tizreal",
   linkedin: "https://www.linkedin.com/in/temiloluwa-odunfa-60a9a21a6/",
   location: "Mississauga, Ontario, Canada",
-  // Set to the PDF path in /public (e.g. "/Temiloluwa_Odunfa_Resume.pdf") once
-  // it is ready. While null, resume links open an email request instead.
-  resume: null,
+  // PDF in /public. To update the resume, replace that file and keep the name.
+  // If set to null, resume links open an email request instead.
+  resume: "/Temiloluwa_Odunfa_Resume.pdf",
 };
 
 export const resumeHref =

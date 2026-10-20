@@ -1,18 +1,17 @@
-import { site, resumeHref } from "../data/site";
-import { DownloadIcon, GithubIcon, LinkedInIcon, MailIcon } from "./icons";
+import { site } from "../data/site";
+import { GithubIcon, LinkedInIcon, MailIcon } from "./icons";
 
 const links = [
-  { label: "Resume", href: resumeHref, icon: <DownloadIcon size={14} />, external: Boolean(site.resume) },
   { label: "GitHub", href: site.github, icon: <GithubIcon size={14} />, external: true },
   { label: "LinkedIn", href: site.linkedin, icon: <LinkedInIcon size={14} />, external: true },
   { label: "Email", href: `mailto:${site.email}`, icon: <MailIcon size={14} />, external: false },
 ];
 
-// Compact one-click row of resume / profile / email links (hero and footer).
-export default function ContactLinks({ className = "", omit = [] }) {
+// Compact one-click row of profile and email links (hero).
+export default function ContactLinks({ className = "" }) {
   return (
     <ul className={`flex flex-wrap gap-2 ${className}`}>
-      {links.filter(({ label }) => !omit.includes(label)).map(({ label, href, icon, external }) => (
+      {links.map(({ label, href, icon, external }) => (
         <li key={label}>
           <a
             href={href}
