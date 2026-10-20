@@ -1,59 +1,65 @@
 "use client";
 
 import {
-  SiReact, SiNextdotjs, SiHtml5, SiTailwindcss, SiJavascript, SiTypescript,
-  SiSpringboot, SiSpringsecurity, SiJsonwebtokens, SiHibernate,
-  SiNodedotjs, SiExpress, SiPostgresql,
-  SiGit, SiGithub, SiDocker, SiVercel, SiPostman,
+  SiTypescript, SiJavascript, SiHtml5, SiCss,
+  SiReact, SiReactrouter, SiVite, SiAxios, SiFormik,
+  SiSpringboot, SiSpringsecurity, SiNestjs, SiNodedotjs, SiJsonwebtokens, SiSocketdotio,
+  SiPostgresql, SiJunit5, SiGit, SiGithubactions, SiDocker,
 } from "react-icons/si";
 import { FaJava, FaDatabase } from "react-icons/fa";
-import { TbApi } from "react-icons/tb";
+import { TbApi, TbArrowsExchange, TbChecklist, TbDatabaseImport } from "react-icons/tb";
 import useReveal from "../hooks/useReveal";
 
+// Mirrors the Technical Skills section of the resume; keep the two in sync.
 const skillGroups = [
   {
-    category: "Backend",
-    description: "APIs, security, and server-side logic",
+    category: "Languages",
+    description: "What I write day to day",
     skills: [
-      { name: "Java",            icon: <FaJava className="text-[#ED8B00]" /> },
-      { name: "Spring Boot",     icon: <SiSpringboot className="text-[#6DB33F]" /> },
-      { name: "Spring Security", icon: <SiSpringsecurity className="text-[#6DB33F]" /> },
-      { name: "REST APIs",       icon: <TbApi className="text-accent" /> },
-      { name: "JWT",             icon: <SiJsonwebtokens /> },
-      { name: "JPA / Hibernate", icon: <SiHibernate className="text-[#BCAE79]" /> },
-      { name: "Node.js",         icon: <SiNodedotjs className="text-[#339933]" /> },
-      { name: "Express",         icon: <SiExpress /> },
-    ],
-  },
-  {
-    category: "Database",
-    description: "Relational data modelling and queries",
-    skills: [
-      { name: "PostgreSQL", icon: <SiPostgresql className="text-[#4169E1]" /> },
+      { name: "TypeScript", icon: <SiTypescript className="text-[#3178C6]" /> },
+      { name: "JavaScript", icon: <SiJavascript className="text-[#F7DF1E]" /> },
+      { name: "Java",       icon: <FaJava className="text-[#ED8B00]" /> },
       { name: "SQL",        icon: <FaDatabase className="text-muted" /> },
+      { name: "HTML",       icon: <SiHtml5 className="text-[#E34F26]" /> },
+      { name: "CSS",        icon: <SiCss className="text-[#663399]" /> },
     ],
   },
   {
     category: "Frontend",
-    description: "User interfaces that talk to those APIs",
+    description: "User interfaces, routing, and forms",
     skills: [
       { name: "React",        icon: <SiReact className="text-[#61DAFB]" /> },
-      { name: "TypeScript",   icon: <SiTypescript className="text-[#3178C6]" /> },
-      { name: "JavaScript",   icon: <SiJavascript className="text-[#F7DF1E]" /> },
-      { name: "HTML / CSS",   icon: <SiHtml5 className="text-[#E34F26]" /> },
-      { name: "Next.js",      icon: <SiNextdotjs /> },
-      { name: "Tailwind CSS", icon: <SiTailwindcss className="text-[#06B6D4]" /> },
+      { name: "React Router", icon: <SiReactrouter className="text-[#CA4245]" /> },
+      { name: "Vite",         icon: <SiVite className="text-[#646CFF]" /> },
+      { name: "Axios",        icon: <SiAxios className="text-[#5A29E4]" /> },
+      { name: "Formik",       icon: <SiFormik className="text-[#2563EB]" /> },
+      { name: "Yup",          icon: <TbChecklist className="text-accent" /> },
     ],
   },
   {
-    category: "Tools",
-    description: "Version control, containers, testing, and deployment",
+    category: "Backend",
+    description: "APIs, security, and real-time services",
     skills: [
-      { name: "Git",     icon: <SiGit className="text-[#F05032]" /> },
-      { name: "GitHub",  icon: <SiGithub /> },
-      { name: "Docker",  icon: <SiDocker className="text-[#2496ED]" /> },
-      { name: "Postman", icon: <SiPostman className="text-[#FF6C37]" /> },
-      { name: "Vercel",  icon: <SiVercel /> },
+      { name: "Spring Boot",     icon: <SiSpringboot className="text-[#6DB33F]" /> },
+      { name: "Spring Security", icon: <SiSpringsecurity className="text-[#6DB33F]" /> },
+      { name: "NestJS",          icon: <SiNestjs className="text-[#E0234E]" /> },
+      { name: "Node.js",         icon: <SiNodedotjs className="text-[#339933]" /> },
+      { name: "REST APIs",       icon: <TbApi className="text-accent" /> },
+      { name: "JWT",             icon: <SiJsonwebtokens /> },
+      { name: "Socket.io",       icon: <SiSocketdotio /> },
+    ],
+  },
+  {
+    category: "Database & Tools",
+    description: "Data, testing, CI, and containers",
+    skills: [
+      { name: "PostgreSQL",     icon: <SiPostgresql className="text-[#4169E1]" /> },
+      { name: "Transactions",   icon: <TbArrowsExchange className="text-accent" /> },
+      { name: "Migrations",     icon: <TbDatabaseImport className="text-accent" /> },
+      { name: "JUnit",          icon: <SiJunit5 className="text-[#25A162]" /> },
+      { name: "Git",            icon: <SiGit className="text-[#F05032]" /> },
+      { name: "GitHub Actions", icon: <SiGithubactions className="text-[#2088FF]" /> },
+      { name: "Docker",         icon: <SiDocker className="text-[#2496ED]" /> },
     ],
   },
 ];
