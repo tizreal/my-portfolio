@@ -1,19 +1,49 @@
 "use client";
 
 import { useState, useEffect, startTransition } from "react";
+import { resumeHref, site } from "../data/site";
 
+// Order follows the page: experience → work → skills → about → contact.
 const navLinks = [
-  { label: "About",    href: "#about" },
-  { label: "Skills",   href: "#skills" },
-  { label: "Projects", href: "#projects" },
-  { label: "Contact",  href: "#resume" },
-  { label: "Resume",   href: "#resume" },
+  { label: "Experience", href: "#experience" },
+  { label: "Work",       href: "#projects" },
+  { label: "Skills",     href: "#skills" },
+  { label: "About",      href: "#about" },
+  { label: "Contact",    href: "#contact" },
 ];
+
+const resumeProps = {
+  href: resumeHref,
+  ...(site.resume ? { target: "_blank", rel: "noopener noreferrer" } : {}),
+};
 
 export default function Navbar() {
   const [scrolled,  setScrolled]  = useState(false);
   const [menuOpen,  setMenuOpen]  = useState(false);
   const [theme,     setTheme]     = useState("dark");
+  const [active,    setActive]    = useState("");
+
+  // Highlight the section currently crossing the middle of the viewport.
+  useEffect(() => {
+    const sections = navLinks
+      .map(({ href }) => document.querySelector(href))
+      .filter(Boolean);
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) setActive(`#${entry.target.id}`);
+        });
+      },
+      { rootMargin: "-45% 0px -50% 0px" },
+    );
+    sections.forEach((section) => observer.observe(section));
+    const clearAtTop = () => { if (window.scrollY < 200) setActive(""); };
+    window.addEventListener("scroll", clearAtTop, { passive: true });
+    return () => {
+      observer.disconnect();
+      window.removeEventListener("scroll", clearAtTop);
+    };
+  }, []);
 
   useEffect(() => {
     const handleScroll = () => setScrolled(window.scrollY > 50);
@@ -23,7 +53,12 @@ export default function Navbar() {
 
   useEffect(() => {
     document.body.style.overflow = menuOpen ? "hidden" : "";
-    return () => { document.body.style.overflow = ""; };
+    const onKeyDown = (e) => { if (e.key === "Escape") setMenuOpen(false); };
+    if (menuOpen) window.addEventListener("keydown", onKeyDown);
+    return () => {
+      document.body.style.overflow = "";
+      window.removeEventListener("keydown", onKeyDown);
+    };
   }, [menuOpen]);
 
   useEffect(() => {
@@ -34,7 +69,10 @@ export default function Navbar() {
   const toggleTheme = () => {
     const next = theme === "dark" ? "light" : "dark";
     setTheme(next);
-    document.documentElement.setAttribute("data-theme", next);
+    const root = document.documentElement;
+    root.classList.add("theme-transition");
+    root.setAttribute("data-theme", next);
+    window.setTimeout(() => root.classList.remove("theme-transition"), 350);
     localStorage.setItem("theme", next);
   };
 
@@ -42,7 +80,8 @@ export default function Navbar() {
     e.preventDefault();
     setMenuOpen(false);
     const target = document.querySelector(href);
-    if (target) target.scrollIntoView({ behavior: "smooth" });
+    const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    if (target) target.scrollIntoView({ behavior: reduceMotion ? "auto" : "smooth" });
   };
 
   const focusRing = "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent/50";
@@ -60,34 +99,38 @@ export default function Navbar() {
         <a
           href="#hero"
           onClick={(e) => handleNavClick(e, "#hero")}
+          aria-label="Back to top"
           className={`font-black text-accent tracking-tight text-xl font-display rounded ${focusRing}`}
         >
           T
         </a>
 
         {/* Desktop links */}
-        <ul className="hidden md:flex gap-8 items-center">
-          {navLinks.map(({ label, href }, index) => (
+        <ul className="hidden md:flex gap-5 lg:gap-8 items-center">
+          {navLinks.map(({ label, href }) => (
             <li key={label}>
-              {index === navLinks.length - 1 ? (
-                <a
-                  href={href}
-                  onClick={(e) => handleNavClick(e, href)}
-                  className={`bg-accent text-white text-xs font-semibold px-5 py-2 rounded-full hover:bg-accent-hover transition-colors duration-200 ${focusRing}`}
-                >
-                  {label}
-                </a>
-              ) : (
-                <a
-                  href={href}
-                  onClick={(e) => handleNavClick(e, href)}
-                  className={`text-muted hover:text-accent text-sm font-medium transition-colors duration-200 rounded ${focusRing}`}
-                >
-                  {label}
-                </a>
-              )}
+              <a
+                href={href}
+                onClick={(e) => handleNavClick(e, href)}
+                aria-current={active === href ? "location" : undefined}
+                className={`relative text-sm font-medium transition-colors duration-200 rounded ${focusRing} after:absolute after:left-0 after:-bottom-1 after:h-0.5 after:w-full after:rounded-full after:bg-accent after:origin-left after:transition-transform after:duration-300 ${
+                  active === href
+                    ? "text-foreground after:scale-x-100"
+                    : "text-muted hover:text-accent after:scale-x-0 hover:after:scale-x-100"
+                }`}
+              >
+                {label}
+              </a>
             </li>
           ))}
+          <li>
+            <a
+              {...resumeProps}
+              className={`bg-accent text-white text-xs font-semibold px-5 py-2 rounded-full hover:bg-accent-hover transition-colors duration-200 ${focusRing}`}
+            >
+              Resume
+            </a>
+          </li>
           <li>
             <button
               onClick={toggleTheme}
@@ -142,8 +185,9 @@ export default function Navbar() {
         }`}
       />
 
-      {/* Side drawer */}
+      {/* Side drawer — inert while closed so its links are not tab-focusable off-screen */}
       <div
+        inert={!menuOpen}
         className={`fixed top-0 right-0 h-full w-72 bg-surface border-l border-border z-50 md:hidden flex flex-col transition-transform duration-300 ease-in-out ${
           menuOpen ? "translate-x-0" : "translate-x-full"
         }`}
@@ -165,27 +209,29 @@ export default function Navbar() {
 
         {/* Nav links */}
         <ul className="flex flex-col gap-1 px-4 py-6 flex-1">
-          {navLinks.map(({ label, href }, index) => (
+          {navLinks.map(({ label, href }) => (
             <li key={label}>
-              {index === navLinks.length - 1 ? (
-                <a
-                  href={href}
-                  onClick={(e) => handleNavClick(e, href)}
-                  className={`inline-flex items-center min-h-11 bg-accent text-white text-sm font-semibold px-5 py-2 rounded-full hover:bg-accent-hover transition-colors duration-200 ${focusRing}`}
-                >
-                  {label}
-                </a>
-              ) : (
-                <a
-                  href={href}
-                  onClick={(e) => handleNavClick(e, href)}
-                  className={`flex items-center min-h-11 px-2 text-foreground/80 hover:text-accent text-base font-medium transition-colors duration-200 rounded-lg hover:bg-accent/5 ${focusRing}`}
-                >
-                  {label}
-                </a>
-              )}
+              <a
+                href={href}
+                onClick={(e) => handleNavClick(e, href)}
+                aria-current={active === href ? "location" : undefined}
+                className={`flex items-center min-h-11 px-2 text-base font-medium transition-colors duration-200 rounded-lg hover:bg-accent/5 ${focusRing} ${
+                  active === href ? "text-accent bg-accent/5" : "text-foreground/80 hover:text-accent"
+                }`}
+              >
+                {label}
+              </a>
             </li>
           ))}
+          <li className="mt-2">
+            <a
+              {...resumeProps}
+              onClick={() => setMenuOpen(false)}
+              className={`inline-flex items-center min-h-11 bg-accent text-white text-sm font-semibold px-5 py-2 rounded-full hover:bg-accent-hover transition-colors duration-200 ${focusRing}`}
+            >
+              Resume
+            </a>
+          </li>
         </ul>
 
         {/* Theme toggle pinned to drawer bottom */}

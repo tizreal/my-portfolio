@@ -1,42 +1,13 @@
-"use client";
-
-import { useEffect, useState } from "react";
-
-const roles = ["Full-Stack Developer", "Backend Engineer", "API Designer"];
+import ContactLinks from "./ContactLinks";
+import RotatingRoles from "./RotatingRoles";
+import { resumeHref, site } from "../data/site";
 
 const stats = [
-  { value: "3+", label: "Years Exp" },
-  { value: "8+", label: "Projects" },
+  { value: "2024", label: "BSc CS, York University" },
+  { value: "2026", label: "BFN Top Performer, SWE cohort" },
 ];
 
 export default function Hero() {
-  const [roleIndex, setRoleIndex] = useState(0);
-  const [displayed, setDisplayed] = useState("");
-  const [deleting, setDeleting] = useState(false);
-
-  useEffect(() => {
-    const current = roles[roleIndex];
-    let timeout;
-
-    if (!deleting && displayed.length < current.length) {
-      timeout = setTimeout(
-        () => setDisplayed(current.slice(0, displayed.length + 1)),
-        80,
-      );
-    } else if (!deleting && displayed.length === current.length) {
-      timeout = setTimeout(() => setDeleting(true), 2000);
-    } else if (deleting && displayed.length > 0) {
-      timeout = setTimeout(() => setDisplayed(displayed.slice(0, -1)), 40);
-    } else if (deleting && displayed.length === 0) {
-      timeout = setTimeout(() => {
-        setDeleting(false);
-        setRoleIndex((prev) => (prev + 1) % roles.length);
-      }, 300);
-    }
-
-    return () => clearTimeout(timeout);
-  }, [displayed, deleting, roleIndex]);
-
   return (
     <section
       id="hero"
@@ -50,56 +21,53 @@ export default function Hero() {
           <div className="flex flex-col lg:flex-row lg:items-start lg:justify-between gap-10 w-full">
             {/* Text content */}
             <div className="w-full max-w-2xl">
-              <div className="flex items-center gap-2 text-accent text-xs uppercase tracking-widest font-medium mb-6">
+              <div className="animate-fade-up flex items-center gap-2 text-accent text-xs uppercase tracking-widest font-medium mb-6" style={{ "--delay": "0ms" }}>
                 <span className="w-6 h-px bg-accent" />
                 Hello, World!
               </div>
 
-              <h1 className="font-display text-3xl md:text-5xl lg:text-6xl font-bold leading-[1.1] mb-4">
+              <h1 className="animate-fade-up font-display text-3xl md:text-5xl lg:text-6xl font-bold leading-[1.1] mb-4" style={{ "--delay": "80ms" }}>
                 <span className="text-foreground">I&apos;m </span>
                 <span className="gradient-text">Temiloluwa Odunfa</span>
               </h1>
 
-              <p className="text-muted/80 text-sm md:text-base font-medium mb-4">
-                Full-Stack Engineer building scalable backend systems and modern
-                web applications.
+              <RotatingRoles
+                className="animate-fade-up font-display text-xl md:text-[1.75rem] text-muted font-semibold mb-4 h-8 md:h-10"
+                style={{ "--delay": "120ms" }}
+              />
+
+              <p className="animate-fade-up font-display text-lg md:text-xl text-foreground/90 font-semibold mb-3" style={{ "--delay": "160ms" }}>
+                Software Engineer — Java, Spring Boot, PostgreSQL &amp; React.
               </p>
 
-              <h2 className="font-display text-xl md:text-[2rem] text-muted font-semibold mb-8 h-9 md:h-10">
-                <span>{displayed}</span>
-                <span className="animate-pulse text-accent">|</span>
-              </h2>
-
-              <p className="text-muted/60 text-sm max-w-xl mb-10 leading-relaxed italic">
-                &ldquo;First, solve the problem. Then, write the code.&rdquo;{" "}
-                <span className="not-italic text-muted/40">— John Johnson</span>
+              <p className="animate-fade-up text-muted text-sm md:text-base max-w-xl mb-10 leading-relaxed" style={{ "--delay": "220ms" }}>
+                I build backend services, REST APIs, and the React frontends
+                that use them.
               </p>
 
-              <div className="flex flex-col sm:flex-row gap-4">
-                <button
-                  onClick={() => {
-                    const projects = document.querySelector("#projects");
-                    if (projects)
-                      projects.scrollIntoView({ behavior: "smooth" });
-                  }}
-                  className="w-full sm:w-auto px-8 py-3 bg-accent text-white font-semibold rounded-full hover:bg-accent-hover hover:-translate-y-1 transition-all duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent/50"
+              <div className="animate-fade-up flex flex-col sm:flex-row gap-4" style={{ "--delay": "300ms" }}>
+                <a
+                  href="#projects"
+                  className="w-full sm:w-auto text-center px-8 py-3 bg-accent text-white font-semibold rounded-full hover:bg-accent-hover hover:-translate-y-1 transition-all duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent/50"
                 >
-                  View My Work
-                </button>
-                <button
-                  onClick={() => {
-                    const contact = document.querySelector("#resume");
-                    if (contact) contact.scrollIntoView({ behavior: "smooth" });
-                  }}
-                  className="w-full sm:w-auto px-8 py-3 border border-border text-foreground/80 font-semibold rounded-full hover:border-accent hover:text-accent hover:-translate-y-1 transition-all duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent/50"
+                  View Selected Work
+                </a>
+                <a
+                  href={resumeHref}
+                  {...(site.resume ? { download: true } : {})}
+                  className="w-full sm:w-auto text-center px-8 py-3 border border-border text-foreground/80 font-semibold rounded-full hover:border-accent hover:text-accent hover:-translate-y-1 transition-all duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent/50"
                 >
-                  Get In Touch
-                </button>
+                  Download Resume
+                </a>
+              </div>
+
+              <div className="animate-fade-up" style={{ "--delay": "360ms" }}>
+                <ContactLinks className="mt-6" />
               </div>
             </div>
 
             {/* Right column: terminal (desktop only) + stat cards */}
-            <div className="lg:flex lg:flex-col lg:items-center lg:gap-3 lg:shrink-0 lg:w-72">
+            <div className="animate-fade-up lg:flex lg:flex-col lg:items-center lg:gap-3 lg:shrink-0 lg:w-72" style={{ "--delay": "420ms" }}>
               {/* Terminal — desktop only */}
               <div className="hidden lg:block bg-surface border border-border rounded-2xl overflow-hidden shadow-md w-72">
                 <div className="flex items-center gap-1.5 px-4 py-3 border-b border-border bg-surface">
@@ -109,12 +77,15 @@ export default function Hero() {
                   <span className="ml-3 text-xs text-muted/50 font-mono">terminal</span>
                 </div>
                 <div className="p-4 font-mono text-xs leading-snug space-y-1">
-                  <p><span className="text-accent">$</span> <span className="text-muted">curl /api/users/me</span></p>
-                  <p className="text-muted/60">→ 200 OK</p>
+                  <p><span className="text-accent">$</span> <span className="text-muted">cat profile.json</span></p>
                   <p className="text-foreground/80">{"{"}</p>
                   <p className="pl-4"><span className="text-secondary">&quot;name&quot;</span><span className="text-muted">: </span><span className="text-accent/80">&quot;Temi&quot;</span><span className="text-muted">,</span></p>
-                  <p className="pl-4"><span className="text-secondary">&quot;role&quot;</span><span className="text-muted">: </span><span className="text-accent/80">&quot;Full-Stack Engineer&quot;</span><span className="text-muted">,</span></p>
-                  <p className="pl-4"><span className="text-secondary">&quot;stack&quot;</span><span className="text-muted">: </span><span className="text-accent/80">&quot;Spring Boot + React&quot;</span><span className="text-muted">,</span></p>
+                  <p className="pl-4"><span className="text-secondary">&quot;role&quot;</span><span className="text-muted">: </span><span className="text-accent/80">&quot;Software Engineer&quot;</span><span className="text-muted">,</span></p>
+                  <p className="pl-4"><span className="text-secondary">&quot;stack&quot;</span><span className="text-muted">: [</span></p>
+                  <p className="pl-8"><span className="text-accent/80">&quot;Java&quot;</span><span className="text-muted">, </span><span className="text-accent/80">&quot;Spring Boot&quot;</span><span className="text-muted">,</span></p>
+                  <p className="pl-8"><span className="text-accent/80">&quot;PostgreSQL&quot;</span><span className="text-muted">, </span><span className="text-accent/80">&quot;React&quot;</span></p>
+                  <p className="pl-4"><span className="text-muted">],</span></p>
+                  <p className="pl-4"><span className="text-secondary">&quot;location&quot;</span><span className="text-muted">: </span><span className="text-accent/80">&quot;Mississauga, ON&quot;</span><span className="text-muted">,</span></p>
                   <p className="pl-4"><span className="text-secondary">&quot;status&quot;</span><span className="text-muted">: </span><span className="text-secondary">&quot;open to opportunities&quot;</span></p>
                   <p className="text-foreground/80">{"}"}</p>
                   <p className="pt-1"><span className="text-accent">$</span> <span className="animate-pulse text-muted">▋</span></p>
@@ -132,7 +103,7 @@ export default function Hero() {
                     <p className="text-2xl font-bold text-accent">
                       {value}
                     </p>
-                    <p className="text-[10px] uppercase tracking-normal text-muted/60 mt-1">
+                    <p className="text-[10px] uppercase tracking-normal text-muted mt-1">
                       {label}
                     </p>
                   </div>

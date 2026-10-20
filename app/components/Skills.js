@@ -1,60 +1,70 @@
 "use client";
 
 import {
-  SiReact, SiNextdotjs, SiHtml5, SiTailwindcss, SiJavascript,
-  SiSpringboot, SiNodedotjs, SiExpress, SiPostgresql,
-  SiGit, SiGithub, SiFigma, SiVercel, SiPostman,
+  SiTypescript, SiJavascript, SiHtml5, SiCss,
+  SiReact, SiReactrouter, SiVite, SiAxios, SiFormik,
+  SiSpringboot, SiSpringsecurity, SiNestjs, SiNodedotjs, SiJsonwebtokens, SiSocketdotio,
+  SiPostgresql, SiJunit5, SiGit, SiGithubactions, SiDocker,
 } from "react-icons/si";
 import { FaJava, FaDatabase } from "react-icons/fa";
-import { TbApi, TbBrandVscode } from "react-icons/tb";
+import { TbApi, TbArrowsExchange, TbChecklist, TbDatabaseImport } from "react-icons/tb";
 import useReveal from "../hooks/useReveal";
 
+// Mirrors the Technical Skills section of the resume; keep the two in sync.
 const skillGroups = [
   {
-    category: "Frontend",
-    description: "Crafting responsive, accessible user interfaces",
+    category: "Languages",
+    description: "What I write day to day",
     skills: [
-      { name: "React",        icon: <SiReact className="text-[#61DAFB]" />,       tier: "proficient" },
-      { name: "Next.js",      icon: <SiNextdotjs />,                              tier: "familiar"   },
-      { name: "HTML / CSS",   icon: <SiHtml5 className="text-[#E34F26]" />,       tier: "proficient" },
-      { name: "Tailwind CSS", icon: <SiTailwindcss className="text-[#06B6D4]" />, tier: "proficient" },
-      { name: "JavaScript",   icon: <SiJavascript className="text-[#F7DF1E]" />,  tier: "proficient" },
+      { name: "TypeScript", icon: <SiTypescript className="text-[#3178C6]" /> },
+      { name: "JavaScript", icon: <SiJavascript className="text-[#F7DF1E]" /> },
+      { name: "Java",       icon: <FaJava className="text-[#ED8B00]" /> },
+      { name: "SQL",        icon: <FaDatabase className="text-muted" /> },
+      { name: "HTML",       icon: <SiHtml5 className="text-[#E34F26]" /> },
+      { name: "CSS",        icon: <SiCss className="text-[#663399]" /> },
+    ],
+  },
+  {
+    category: "Frontend",
+    description: "User interfaces, routing, and forms",
+    skills: [
+      { name: "React",        icon: <SiReact className="text-[#61DAFB]" /> },
+      { name: "React Router", icon: <SiReactrouter className="text-[#CA4245]" /> },
+      { name: "Vite",         icon: <SiVite className="text-[#646CFF]" /> },
+      { name: "Axios",        icon: <SiAxios className="text-[#5A29E4]" /> },
+      { name: "Formik",       icon: <SiFormik className="text-[#2563EB]" /> },
+      { name: "Yup",          icon: <TbChecklist className="text-accent" /> },
     ],
   },
   {
     category: "Backend",
-    description: "Building reliable APIs and server-side logic",
+    description: "APIs, security, and real-time services",
     skills: [
-      { name: "Spring Boot", icon: <SiSpringboot className="text-[#6DB33F]" />, tier: "proficient" },
-      { name: "Java",        icon: <FaJava className="text-[#ED8B00]" />,        tier: "proficient" },
-      { name: "Node.js",     icon: <SiNodedotjs className="text-[#339933]" />,  tier: "familiar"   },
-      { name: "Express",     icon: <SiExpress />,                                tier: "familiar"   },
-      { name: "REST APIs",   icon: <TbApi className="text-accent" />,            tier: "proficient" },
-      { name: "SQL",         icon: <FaDatabase className="text-muted" />,        tier: "familiar"   },
-      { name: "PostgreSQL",  icon: <SiPostgresql className="text-[#4169E1]" />,  tier: "proficient" },
+      { name: "Spring Boot",     icon: <SiSpringboot className="text-[#6DB33F]" /> },
+      { name: "Spring Security", icon: <SiSpringsecurity className="text-[#6DB33F]" /> },
+      { name: "NestJS",          icon: <SiNestjs className="text-[#E0234E]" /> },
+      { name: "Node.js",         icon: <SiNodedotjs className="text-[#339933]" /> },
+      { name: "REST APIs",       icon: <TbApi className="text-accent" /> },
+      { name: "JWT",             icon: <SiJsonwebtokens /> },
+      { name: "Socket.io",       icon: <SiSocketdotio /> },
     ],
   },
   {
-    category: "Tools & Others",
-    description: "Workflow, version control, and design tooling",
+    category: "Database & Tools",
+    description: "Data, testing, CI, and containers",
     skills: [
-      { name: "Git",      icon: <SiGit className="text-[#F05032]" />,        tier: "proficient" },
-      { name: "GitHub",   icon: <SiGithub />,                                 tier: "proficient" },
-      { name: "VS Code",  icon: <TbBrandVscode className="text-[#007ACC]" />, tier: "proficient" },
-      { name: "Figma",    icon: <SiFigma className="text-[#F24E1E]" />,       tier: "familiar"   },
-      { name: "Vercel",   icon: <SiVercel />,                                  tier: "familiar"   },
-      { name: "Postman",  icon: <SiPostman className="text-[#FF6C37]" />,     tier: "proficient" },
+      { name: "PostgreSQL",     icon: <SiPostgresql className="text-[#4169E1]" /> },
+      { name: "Transactions",   icon: <TbArrowsExchange className="text-accent" /> },
+      { name: "Migrations",     icon: <TbDatabaseImport className="text-accent" /> },
+      { name: "JUnit",          icon: <SiJunit5 className="text-[#25A162]" /> },
+      { name: "Git",            icon: <SiGit className="text-[#F05032]" /> },
+      { name: "GitHub Actions", icon: <SiGithubactions className="text-[#2088FF]" /> },
+      { name: "Docker",         icon: <SiDocker className="text-[#2496ED]" /> },
     ],
   },
 ];
 
 const STAGGER = ["", "delay-100", "delay-200", "delay-300"];
-
-const TIER_DOT = {
-  proficient: "bg-accent",
-  familiar: "border border-accent bg-transparent",
-  learning: "bg-muted/30",
-};
 
 export default function Skills() {
   const [gridRef, gridRevealed] = useReveal();
@@ -69,7 +79,7 @@ export default function Skills() {
           Technologies and tools I use to build things.
         </p>
 
-        <div ref={gridRef} className="grid md:grid-cols-3 gap-6">
+        <div ref={gridRef} className="grid sm:grid-cols-2 lg:grid-cols-4 gap-6">
           {skillGroups.map(({ category, description, skills }, index) => (
             <div
               key={category}
@@ -80,33 +90,18 @@ export default function Skills() {
               </h3>
               <p className="text-xs text-muted mb-4 leading-relaxed">{description}</p>
               <ul className="space-y-3 flex-1">
-                {skills.map(({ name, icon, tier }) => (
+                {skills.map(({ name, icon }) => (
                   <li
                     key={name}
                     className="flex items-center gap-3 text-sm text-foreground/70 hover:text-foreground transition-colors duration-200"
                   >
-                    <span className="text-base w-5 flex items-center justify-center shrink-0">
+                    <span className="text-base w-5 flex items-center justify-center shrink-0" aria-hidden="true">
                       {icon}
                     </span>
                     {name}
-                    <span className={`ml-auto w-1.5 h-1.5 rounded-full shrink-0 ${TIER_DOT[tier]}`} />
                   </li>
                 ))}
               </ul>
-              <div className="flex items-center gap-3 mt-6 pt-4 border-t border-border">
-                <span className="flex items-center gap-1.5 text-xs text-muted/50">
-                  <span className="w-1.5 h-1.5 rounded-full bg-accent" />
-                  Proficient
-                </span>
-                <span className="flex items-center gap-1.5 text-xs text-muted/50">
-                  <span className="w-1.5 h-1.5 rounded-full border border-accent bg-transparent" />
-                  Familiar
-                </span>
-                <span className="flex items-center gap-1.5 text-xs text-muted/50">
-                  <span className="w-1.5 h-1.5 rounded-full bg-muted/30" />
-                  Learning
-                </span>
-              </div>
             </div>
           ))}
         </div>

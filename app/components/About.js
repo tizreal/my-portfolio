@@ -4,22 +4,32 @@ import useReveal from "../hooks/useReveal";
 
 const timeline = [
   {
-    label: "Past",
+    label: "Education",
     num: "01",
-    heading: "Where I started",
-    body: "York University is where it all clicked, computer science fundamentals, Java, and the slow realization that I actually enjoyed this. The problem-solving felt less like coursework and more like puzzles I didn't want to put down. I also learned pretty quickly that writing code others can read matters just as much as code that runs.",
+    heading: "Degree and credentials",
+    body: "I graduated from York University in 2024 with a BSc in Computer Science.",
+    credentials: [
+      {
+        text: "Top Performer, Software Engineering cohort — Black Career Advancement Program, Black Founders Network, University of Toronto (2026)",
+        href: "https://www.linkedin.com/feed/update/urn:li:activity:7513041055089541120/",
+      },
+      {
+        // Add the Coursera credential URL as `href` to link this line.
+        text: "Meta Front-End Developer Professional Certificate (2025)",
+      },
+    ],
   },
   {
-    label: "Present",
+    label: "Now",
     num: "02",
-    heading: "Where I am now",
-    body: "I'm a software developer based in Toronto, working across the full stack, Spring Boot APIs to React frontends. I care about clean architecture and shipping things that actually work, not just things that technically run.\n\nThese days I also lean on AI tools to move faster and think sharper, but I've learned the hard way that AI is only as useful as your ability to question what it gives you. The fundamentals still matter. Maybe more than ever.",
+    heading: "Current role",
+    body: "I'm currently a Full Stack Software Developer on contract, working across backend services, databases, and frontend features.",
   },
   {
-    label: "Future",
+    label: "Focus",
     num: "03",
-    heading: "Where I'm headed",
-    body: "I want to work on systems that actually scale, where the decisions you make early show up months later in ways you didn't expect. I'm planting my roots in Toronto but I'm not putting myself in a box. Distributed systems, products that matter, teams that give a damn, that's where I'm headed.",
+    heading: "What I care about",
+    body: "I care about APIs, data integrity, authentication and authorization, and reliable software, and while I use AI tools in development, I review, test, and understand the code before I ship it.",
   },
 ];
 
@@ -36,12 +46,12 @@ export default function About() {
           About Me
         </h2>
         <p className="text-muted text-base leading-relaxed mb-16 max-w-xl text-center mx-auto">
-          I got into software because problems that seem impossibly complex usually have elegant solutions hiding underneath them. These days that means building systems that hold up under real load, writing APIs other developers enjoy using, and shipping products that actually do what they promise.
+          I&apos;m a software engineer focused on backend work in Java, Spring Boot, PostgreSQL, and REST APIs, and I also build frontends with React and TypeScript.
         </p>
 
         {/* Past / Present / Future cards */}
         <div ref={gridRef} className="grid md:grid-cols-3 gap-6">
-          {timeline.map(({ label, num, heading, body }, index) => (
+          {timeline.map(({ label, num, heading, body, credentials }, index) => (
             <div
               key={label}
               className={`border border-border rounded-2xl p-8 relative overflow-hidden shadow-sm hover:shadow-md hover:-translate-y-1 transition-all duration-300 ease-out ${index === 1 ? "bg-accent/5 border-t-2 border-t-accent hover:border-accent/60" : "bg-surface hover:border-accent/40"} ${STAGGER[index]} ${gridRevealed ? "opacity-100 translate-y-0" : "opacity-0 translate-y-6"}`}
@@ -65,6 +75,26 @@ export default function About() {
                   {para}
                 </p>
               ))}
+              {credentials && (
+                <ul className="mt-4 pt-4 border-t border-border space-y-2 list-disc pl-5 marker:text-accent">
+                  {credentials.map(({ text, href }) => (
+                    <li key={text} className="text-muted text-sm leading-relaxed">
+                      {href ? (
+                        <a
+                          href={href}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="underline decoration-accent/40 underline-offset-2 hover:text-accent hover:decoration-accent transition-colors duration-200 rounded focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent/50"
+                        >
+                          {text}
+                        </a>
+                      ) : (
+                        text
+                      )}
+                    </li>
+                  ))}
+                </ul>
+              )}
             </div>
           ))}
         </div>
