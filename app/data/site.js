@@ -9,6 +9,9 @@ export const site = {
   // PDF in /public. To update the resume, replace that file and keep the name.
   // If set to null, resume links open an email request instead.
   resume: "/Temiloluwa_Odunfa_Resume.pdf",
+  // Umami Cloud website ID (Settings → Websites). While null, no analytics
+  // script loads and nothing is tracked.
+  umamiWebsiteId: null,
 };
 
 export const resumeHref =

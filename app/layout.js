@@ -1,6 +1,7 @@
 import Script from "next/script";
 import "./globals.css";
 import { site } from "./data/site";
+import Analytics from "./components/Analytics";
 
 const title = "Temiloluwa Odunfa | Software Engineer";
 const description =
@@ -59,6 +60,7 @@ export default function RootLayout({ children }) {
         {/* Secondary blob — bottom-right (emerald) */}
         <div className="fixed -bottom-40 -right-40 w-145 h-145 rounded-full bg-secondary/8 blur-[130px] pointer-events-none -z-10" />
         {children}
+        <Analytics />
       </body>
     </html>
   );

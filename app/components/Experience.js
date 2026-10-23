@@ -80,6 +80,7 @@ export default function Experience() {
                     {href ? (
                       <a
                         href={href}
+                        data-track={`Experience: ${name}`}
                         target="_blank"
                         rel="noopener noreferrer"
                         className="text-accent underline decoration-accent/40 underline-offset-2 hover:decoration-accent rounded focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent/50"

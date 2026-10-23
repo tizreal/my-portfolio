@@ -15,6 +15,8 @@ export default function ContactLinks({ className = "" }) {
         <li key={label}>
           <a
             href={href}
+            data-track={label}
+            data-track-from="hero"
             {...(external ? { target: "_blank", rel: "noopener noreferrer" } : {})}
             className="inline-flex items-center gap-1.5 min-h-9 text-xs font-medium px-3 py-1.5 rounded-full border border-border text-muted hover:border-accent hover:text-accent hover:bg-accent/8 transition-all duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent/50"
           >

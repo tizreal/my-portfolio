@@ -31,6 +31,8 @@ export default function Resume() {
             <div className="mt-auto pt-7">
               <a
                 href={resumeHref}
+                data-track="Resume"
+                data-track-from="contact"
                 {...(site.resume ? { download: true } : {})}
                 className="inline-flex items-center gap-2 bg-accent text-white font-semibold text-sm px-6 py-3 rounded-full hover:bg-accent-hover hover:-translate-y-0.5 transition-all duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent/50"
               >
@@ -52,6 +54,8 @@ export default function Resume() {
               {/* Email — full width */}
               <a
                 href={`mailto:${site.email}`}
+                data-track="Email"
+                data-track-from="contact"
                 className="flex items-center gap-3 border border-border rounded-xl px-4 py-3 text-sm text-foreground hover:border-accent hover:text-accent hover:bg-accent/5 transition-all duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent/50"
               >
                 <span className="text-accent"><MailIcon /></span>
@@ -61,6 +65,8 @@ export default function Resume() {
               <div className="flex gap-3">
                 <a
                   href={site.github}
+                  data-track="GitHub"
+                  data-track-from="contact"
                   target="_blank"
                   rel="noopener noreferrer"
                   className="flex flex-1 items-center gap-3 border border-border rounded-xl px-4 py-3 text-sm text-foreground hover:border-accent hover:text-accent hover:bg-accent/5 transition-all duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent/50"
@@ -70,6 +76,8 @@ export default function Resume() {
                 </a>
                 <a
                   href={site.linkedin}
+                  data-track="LinkedIn"
+                  data-track-from="contact"
                   target="_blank"
                   rel="noopener noreferrer"
                   className="flex flex-1 items-center gap-3 border border-border rounded-xl px-4 py-3 text-sm text-foreground hover:border-[#0A66C2] hover:text-[#0A66C2] hover:bg-[#0A66C2]/5 transition-all duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent/50"
