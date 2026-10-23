@@ -72,7 +72,8 @@ const projects = [
       { label: "Backend", href: "https://github.com/tizreal/UserManager-Backend" },
     ],
     demoUrl: "https://usermanager-frontend.vercel.app/",
-    demoAvailable: true,
+    // Disabled pending a backend authorization fix; re-enable once deployed.
+    demoAvailable: false,
     // Backend runs on Render's free tier, which sleeps when idle.
     freeTierBackend: true,
   },
@@ -256,7 +257,7 @@ function ProjectCard({ project, index, featured, revealed }) {
             </span>
             <span>
             The demo&apos;s backend runs on a free hosting tier and sleeps when
-            idle, so the first load can take up to a minute. It isn&apos;t
+            idle, so the first load can take two to three minutes. It isn&apos;t
             broken; give it a moment to wake up.
             </span>
           </p>
