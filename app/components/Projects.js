@@ -118,6 +118,7 @@ function StageExplorer({ title, stages }) {
             <button
               type="button"
               onClick={() => setSelected(i)}
+              data-track={`TrackLo stage: ${name}`}
               aria-pressed={selected === i}
               aria-controls={panelId}
               className={`relative z-20 text-xs md:text-base font-semibold px-3 md:px-5 py-1.5 md:py-2 rounded-full border transition-all duration-200 ${linkFocus} ${
@@ -219,6 +220,7 @@ function ProjectCard({ project, index, featured, revealed }) {
               target="_blank"
               rel="noopener noreferrer"
               aria-label={`${project.title}: ${label} (GitHub)`}
+              data-track={`Source: ${project.title} ${label}`.slice(0, 50)}
               className={`group/link inline-flex items-center gap-1.5 text-xs font-medium px-3 py-1.5 rounded-full border border-border text-muted hover:border-accent hover:text-accent hover:bg-accent/8 transition-all duration-200 ${linkFocus}`}
             >
               <GithubIcon size={14} /> {label}
@@ -236,6 +238,7 @@ function ProjectCard({ project, index, featured, revealed }) {
               target="_blank"
               rel="noopener noreferrer"
               aria-label={`${project.title}: Live Demo`}
+              data-track={`Demo: ${project.title}`}
               className={`inline-flex items-center gap-1.5 text-xs font-medium px-3 py-1.5 rounded-full bg-accent text-white hover:bg-accent-hover transition-all duration-200 ${linkFocus}`}
             >
               <ExternalIcon /> Live Demo

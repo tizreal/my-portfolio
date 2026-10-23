@@ -48,12 +48,15 @@ export default function Hero() {
               <div className="animate-fade-up flex flex-col sm:flex-row gap-4" style={{ "--delay": "300ms" }}>
                 <a
                   href="#projects"
+                  data-track="View Selected Work"
                   className="w-full sm:w-auto text-center px-8 py-3 bg-accent text-white font-semibold rounded-full hover:bg-accent-hover hover:-translate-y-1 transition-all duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent/50"
                 >
                   View Selected Work
                 </a>
                 <a
                   href={resumeHref}
+                  data-track="Resume"
+                  data-track-from="hero"
                   {...(site.resume ? { download: true } : {})}
                   className="w-full sm:w-auto text-center px-8 py-3 border border-border text-foreground/80 font-semibold rounded-full hover:border-accent hover:text-accent hover:-translate-y-1 transition-all duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent/50"
                 >

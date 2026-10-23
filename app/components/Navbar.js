@@ -112,6 +112,7 @@ export default function Navbar() {
               <a
                 href={href}
                 onClick={(e) => handleNavClick(e, href)}
+                data-track={`Nav: ${label}`}
                 aria-current={active === href ? "location" : undefined}
                 className={`relative text-sm font-medium transition-colors duration-200 rounded ${focusRing} after:absolute after:left-0 after:-bottom-1 after:h-0.5 after:w-full after:rounded-full after:bg-accent after:origin-left after:transition-transform after:duration-300 ${
                   active === href
@@ -126,6 +127,8 @@ export default function Navbar() {
           <li>
             <a
               {...resumeProps}
+              data-track="Resume"
+              data-track-from="nav"
               className={`bg-accent text-white text-xs font-semibold px-5 py-2 rounded-full hover:bg-accent-hover transition-colors duration-200 ${focusRing}`}
             >
               Resume
@@ -214,6 +217,7 @@ export default function Navbar() {
               <a
                 href={href}
                 onClick={(e) => handleNavClick(e, href)}
+                data-track={`Nav: ${label}`}
                 aria-current={active === href ? "location" : undefined}
                 className={`flex items-center min-h-11 px-2 text-base font-medium transition-colors duration-200 rounded-lg hover:bg-accent/5 ${focusRing} ${
                   active === href ? "text-accent bg-accent/5" : "text-foreground/80 hover:text-accent"
@@ -226,6 +230,8 @@ export default function Navbar() {
           <li className="mt-2">
             <a
               {...resumeProps}
+              data-track="Resume"
+              data-track-from="nav"
               onClick={() => setMenuOpen(false)}
               className={`inline-flex items-center min-h-11 bg-accent text-white text-sm font-semibold px-5 py-2 rounded-full hover:bg-accent-hover transition-colors duration-200 ${focusRing}`}
             >

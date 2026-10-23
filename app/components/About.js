@@ -82,6 +82,7 @@ export default function About() {
                       {href ? (
                         <a
                           href={href}
+                          data-track="Credential: BFN post"
                           target="_blank"
                           rel="noopener noreferrer"
                           className="underline decoration-accent/40 underline-offset-2 hover:text-accent hover:decoration-accent transition-colors duration-200 rounded focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent/50"
