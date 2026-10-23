@@ -1,7 +1,16 @@
 import Script from "next/script";
+import { Inter } from "next/font/google";
 import "./globals.css";
 import { site } from "./data/site";
 import Analytics from "./components/Analytics";
+
+// Self-hosted at build time by next/font; Inter is a variable font, so every
+// weight the site uses (400–900) is included.
+const inter = Inter({
+  subsets: ["latin"],
+  display: "swap",
+  variable: "--font-inter-next",
+});
 
 const title = "Temiloluwa Odunfa | Software Engineer";
 const description =
@@ -42,16 +51,10 @@ export default function RootLayout({ children }) {
       lang="en"
       data-theme="dark"
       suppressHydrationWarning
-      className="h-full antialiased scroll-smooth"
+      className={`${inter.variable} h-full antialiased scroll-smooth`}
     >
       <head>
         <meta name="viewport" content="width=device-width, initial-scale=1" />
-        <link rel="preconnect" href="https://fonts.googleapis.com" />
-        <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
-        <link
-          href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;900&display=swap"
-          rel="stylesheet"
-        />
         <Script id="theme-init" strategy="beforeInteractive" dangerouslySetInnerHTML={{ __html: themeScript }} />
       </head>
       <body className="min-h-full flex flex-col bg-background text-foreground font-sans overflow-x-hidden">

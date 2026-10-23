@@ -2,8 +2,8 @@
 
 /* ── Font family values (Inter-only system) ── */
 :root {
-  --font-inter:   'Inter', ui-sans-serif, system-ui, sans-serif;
-  --font-poppins: 'Inter', ui-sans-serif, system-ui, sans-serif;
+  --font-inter:   var(--font-inter-next), ui-sans-serif, system-ui, sans-serif;
+  --font-poppins: var(--font-inter-next), ui-sans-serif, system-ui, sans-serif;
 }
 
 /* ── Fixed accent colors — no light/dark variation ── */
