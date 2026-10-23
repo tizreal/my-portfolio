@@ -11,7 +11,7 @@ export const site = {
   resume: "/Temiloluwa_Odunfa_Resume.pdf",
   // Umami Cloud website ID (Settings → Websites). While null, no analytics
   // script loads and nothing is tracked.
-  umamiWebsiteId: null,
+  umamiWebsiteId: "ee06f59f-343a-4c8b-bf4d-9b19d2aa2a24",
 };
 
 export const resumeHref =
