@@ -9,6 +9,7 @@ import { ExternalIcon, GithubIcon, WarningIcon } from "./icons";
 
 // To re-enable a live demo, set `demoAvailable: true` on that project.
 // `freeTierBackend` shows a note that the first request may be slow.
+// `demoNote` describes the demo's sample data, using the same wording as the apps and READMEs.
 // `healthUrl` is checked on page load to wake the backend and show whether the demo is ready.
 const projects = [
   {
@@ -53,6 +54,7 @@ const projects = [
     source: [{ label: "GitHub Profile", href: site.github }],
     demoUrl: "https://tracklo-ui.vercel.app/",
     healthUrl: "https://tracklo-api.onrender.com/health",
+    demoNote: "Demo environment with fictional sample data. Changes are temporary and reset automatically. Pick a role to sign in.",
     demoAvailable: true,
     // Backend runs on Render's free tier, which sleeps when idle.
     freeTierBackend: true,
@@ -76,6 +78,7 @@ const projects = [
     ],
     demoUrl: "https://usermanager-frontend.vercel.app/",
     healthUrl: "https://usermanager-secure-api.onrender.com/api/health",
+    demoNote: "Demo environment with fictional sample data. Changes are temporary and reset automatically. Sign in with the demo account; posts by Ada, Alan and Grace are sample content.",
     demoAvailable: true,
     // Backend runs on Render's free tier, which sleeps when idle.
     freeTierBackend: true,
@@ -98,6 +101,7 @@ const projects = [
     ],
     demoUrl: "https://library-app-hazel-psi.vercel.app/",
     healthUrl: "https://libraryappbackend-wok5.onrender.com/api/books",
+    demoNote: "Demo environment with fictional sample data. Changes are temporary and reset automatically. Shared sandbox; resets on startup and every 6 hours.",
     demoAvailable: true,
     // Backend runs on Render's free tier, which sleeps when idle.
     freeTierBackend: true,
@@ -274,6 +278,9 @@ function ProjectCard({ project, index, featured, revealed }) {
           )}
           <DemoStatusBadge status={demoStatus} />
         </div>
+        {project.demoAvailable && project.demoNote && (
+          <p className="mt-3 text-xs text-muted leading-relaxed">{project.demoNote}</p>
+        )}
         {project.demoAvailable && project.freeTierBackend && demoStatus !== "ready" && (
           <p className="mt-3 flex items-start gap-2 text-xs text-muted leading-relaxed">
             <span className="text-amber-500 mt-0.5">
