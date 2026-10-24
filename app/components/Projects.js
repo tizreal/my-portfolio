@@ -60,20 +60,19 @@ const projects = [
     imagePosition: "object-center",
     role: "Solo project. Built the Spring Boot backend and the React frontend.",
     problem:
-      "A complete account flow: sign up, verify email, log in, and recover a forgotten password.",
+      "Accounts plus a small social feed: sign up, verify email, log in, recover a password, post and comment, with admin tools for managing users.",
     highlights: [
-      "A Spring Security filter validates the JWT on each request, with a configurable list of public endpoints.",
-      "Email verification and password reset use tokenized links sent with Spring Mail and Thymeleaf templates.",
-      "The React frontend has protected routes, Formik/Yup validation, and a user-management page.",
+      "Authorization is enforced on the server: USER and ADMIN roles, owner-or-admin checks on deletes, and request/response DTOs so roles and password hashes can't be set or read through the API.",
+      "Password-reset tokens are stored hashed, expire after 10 minutes and are consumed atomically, so each link works once. Changing a password signs out every existing session.",
+      "141 tests, most against real PostgreSQL through Testcontainers, cover authentication, authorization and the Flyway migrations, and run in GitHub Actions on every push.",
     ],
-    tags: ["Spring Boot", "PostgreSQL", "JWT", "React", "React Router", "Formik", "Yup"],
+    tags: ["Spring Boot", "Spring Security", "PostgreSQL", "Flyway", "JWT", "Testcontainers", "React"],
     source: [
       { label: "Frontend", href: "https://github.com/tizreal/usermanager-frontend" },
       { label: "Backend", href: "https://github.com/tizreal/UserManager-Backend" },
     ],
     demoUrl: "https://usermanager-frontend.vercel.app/",
-    // Disabled pending a backend authorization fix; re-enable once deployed.
-    demoAvailable: false,
+    demoAvailable: true,
     // Backend runs on Render's free tier, which sleeps when idle.
     freeTierBackend: true,
   },
