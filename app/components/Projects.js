@@ -3,11 +3,14 @@
 import { useState } from "react";
 import Image from "next/image";
 import useReveal from "../hooks/useReveal";
+import useDemoStatus from "../hooks/useDemoStatus";
 import { site } from "../data/site";
 import { ExternalIcon, GithubIcon, WarningIcon } from "./icons";
 
 // To re-enable a live demo, set `demoAvailable: true` on that project.
 // `freeTierBackend` shows a note that the first request may be slow.
+// `demoNote` describes the demo's sample data, using the same wording as the apps and READMEs.
+// `healthUrl` is checked on page load to wake the backend and show whether the demo is ready.
 const projects = [
   {
     title: "TrackLo",
@@ -50,6 +53,8 @@ const projects = [
     // Repositories are private, so link to the GitHub profile.
     source: [{ label: "GitHub Profile", href: site.github }],
     demoUrl: "https://tracklo-ui.vercel.app/",
+    healthUrl: "https://tracklo-api.onrender.com/health",
+    demoNote: "Demo environment with fictional sample data. Changes are temporary and reset automatically. Pick a role to sign in.",
     demoAvailable: true,
     // Backend runs on Render's free tier, which sleeps when idle.
     freeTierBackend: true,
@@ -72,6 +77,8 @@ const projects = [
       { label: "Backend", href: "https://github.com/tizreal/UserManager-Backend" },
     ],
     demoUrl: "https://usermanager-frontend.vercel.app/",
+    healthUrl: "https://usermanager-secure-api.onrender.com/api/health",
+    demoNote: "Demo environment with fictional sample data. Changes are temporary and reset automatically. Sign in with the demo account; posts by Ada, Alan and Grace are sample content.",
     demoAvailable: true,
     // Backend runs on Render's free tier, which sleeps when idle.
     freeTierBackend: true,
@@ -93,6 +100,8 @@ const projects = [
       { label: "Express API", href: "https://github.com/tizreal/LibraryAppExpressBackend" },
     ],
     demoUrl: "https://library-app-hazel-psi.vercel.app/",
+    healthUrl: "https://libraryappbackend-wok5.onrender.com/api/books",
+    demoNote: "Demo environment with fictional sample data. Changes are temporary and reset automatically. Shared sandbox; resets on startup and every 6 hours.",
     demoAvailable: true,
     // Backend runs on Render's free tier, which sleeps when idle.
     freeTierBackend: true,
@@ -147,7 +156,26 @@ function StageExplorer({ title, stages }) {
   );
 }
 
+const DEMO_STATUS = {
+  checking: { label: "Checking demo…", dot: "bg-muted" },
+  waking: { label: "Waking up, about 1–2 min", dot: "bg-amber-500 animate-pulse" },
+  ready: { label: "Demo ready", dot: "bg-emerald-500" },
+  unavailable: { label: "Demo unavailable right now; screenshots and source are still here", dot: "bg-red-500" },
+};
+
+function DemoStatusBadge({ status }) {
+  const info = status && DEMO_STATUS[status];
+  if (!info) return null;
+  return (
+    <span role="status" aria-live="polite" className="inline-flex items-center gap-1.5 text-xs text-muted">
+      <span aria-hidden="true" className={`h-2 w-2 rounded-full ${info.dot}`} />
+      {info.label}
+    </span>
+  );
+}
+
 function ProjectCard({ project, index, featured, revealed }) {
+  const demoStatus = useDemoStatus(project.demoAvailable ? project.healthUrl : null);
   return (
     <div
       className={`bg-surface border border-border rounded-2xl overflow-hidden flex flex-col relative shadow-sm hover:shadow-lg hover:border-accent focus-within:border-accent hover:-translate-y-1 transition-all duration-300 ease-out group ${STAGGER[index]} ${revealed ? "opacity-100 translate-y-0" : "opacity-0 translate-y-6"}`}
@@ -248,8 +276,12 @@ function ProjectCard({ project, index, featured, revealed }) {
               Demo temporarily offline
             </span>
           )}
+          <DemoStatusBadge status={demoStatus} />
         </div>
-        {project.demoAvailable && project.freeTierBackend && (
+        {project.demoAvailable && project.demoNote && (
+          <p className="mt-3 text-xs text-muted leading-relaxed">{project.demoNote}</p>
+        )}
+        {project.demoAvailable && project.freeTierBackend && demoStatus !== "ready" && (
           <p className="mt-3 flex items-start gap-2 text-xs text-muted leading-relaxed">
             <span className="text-amber-500 mt-0.5">
               <WarningIcon />
