@@ -82,7 +82,7 @@ const projects = [
     role: "Solo project. Built the React frontend and both backends.",
     problem: "Keep track of a library's books and members from one interface.",
     highlights: [
-      "The same REST API (CRUD for books and members) built twice: Spring Boot with Spring Data JPA, and Node.js/Express with parameterized SQL via node-postgres.",
+      "Similar REST endpoints (CRUD for books and members) built twice: Spring Boot with Spring Data JPA, and Node.js/Express with parameterized SQL via node-postgres. The member payloads differ (the username field is named differently), and the frontend uses the Spring Boot API.",
       "Both backends use PostgreSQL and the same layered structure: routes, services, and repositories.",
       "A React and Vite frontend uses the API through a shared Axios client and React context.",
     ],
