@@ -3,6 +3,7 @@ import { Inter } from "next/font/google";
 import "./globals.css";
 import { site } from "./data/site";
 import Analytics from "./components/Analytics";
+import { Analytics as VercelAnalytics } from "@vercel/analytics/next";
 
 // Self-hosted at build time by next/font; Inter is a variable font, so every
 // weight the site uses (400–900) is included.
@@ -64,6 +65,7 @@ export default function RootLayout({ children }) {
         <div className="fixed -bottom-40 -right-40 w-145 h-145 rounded-full bg-secondary/8 blur-[130px] pointer-events-none -z-10" />
         {children}
         <Analytics />
+        <VercelAnalytics />
       </body>
     </html>
   );
